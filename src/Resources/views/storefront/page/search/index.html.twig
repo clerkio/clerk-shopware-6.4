@@ -12,9 +12,15 @@
 					data-offset="0"
 					data-target="#clerk-search-results"
 					data-query="{{ page.searchTerm }}"
+			{% if config('Clerkio.config.searchCategoriesEnabled') == 'true' %}
+					data-search-categories="{{config('Clerkio.config.searchNumberOfCategories')}}"
+					data-search-pages="{{config('Clerkio.config.searchNumberOfPages')}}"
+					data-serch-pages-types="{{config('Clerkio.config.searchPageTypes')}}"
+			{% endif %}		
 			{% if config('Clerkio.config.facetedSearchEnabled') == 'true' %}
 					data-facets-target="#clerk-search-filters"
 					data-facets-attributes='["price","categories","brand"]'
+					data-facets-design="{{config('Clerkio.config.facetedSearchDesign')}}"
 			{% endif %}
 			></span>
 			{% if config('Clerkio.config.facetedSearchEnabled') == 'true' %}
