@@ -1,7 +1,7 @@
 {% sw_extends '@Storefront/storefront/page/product-detail/buy-widget-form.html.twig' %}
 {% block page_product_detail_product_buy_meta %}
 	{{ parent() }}
-	{% if config('Clerkio.config.PowerstepRecommendationsEnabled') == 'true' %}
+	{% if config('clerkio64.config.PowerstepRecommendationsEnabled') == 'true' %}
 		{% if product.cover.media %}
 			{% set image = product.cover.media %}
 			<input type="hidden"

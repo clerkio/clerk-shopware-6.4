@@ -2,7 +2,7 @@
 
 {% block layout_head_javascript_tracking %}
 	{{ parent() }}
-	{% if config('Clerkio.config.enabled') == 'true' %}
+	{% if config('clerkio64.config.enabled') == 'true' %}
 		<!-- Start of Clerk.io E-commerce Personalisation tool - www.clerk.io -->
 		<script type="text/javascript">
 		 (function(w,d){
@@ -13,13 +13,13 @@
 		 })(window,document);
 
 		 Clerk('config', {
-		  key: "{{ config('Clerkio.config.publicKey') }}"
+		  key: "{{ config('clerkio64.config.publicKey') }}"
 		 });
 		</script>
 		<!-- End of Clerk.io E-commerce Personalisation tool - www.clerk.io -->
 	{% endif %}
-	{% if config('Clerkio.config.PowerstepRecommendationsEnabled') == 'true' %}
-		{% if config('Clerkio.config.PowerstepRecommendationsType') == 'popup' %}
+	{% if config('clerkio64.config.PowerstepRecommendationsEnabled') == 'true' %}
+		{% if config('clerkio64.config.PowerstepRecommendationsType') == 'popup' %}
 			<script src="{{ asset('bundles/clerkio/js/powerstep-popup.js') }}"></script>
 		{% else %}
 			<script src="{{ asset('bundles/clerkio/js/powerstep-page.js') }}"></script>

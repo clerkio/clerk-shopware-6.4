@@ -1,9 +1,9 @@
 {% sw_extends '@Storefront/storefront/layout/header/header.html.twig' %}
 {% block layout_header %}
 	{{ parent() }}
-	{% if config('Clerkio.config.exitIntentRecommendationsEnabled') == 'true' %}
+	{% if config('clerkio64.config.exitIntentRecommendationsEnabled') == 'true' %}
 		<link href="{{ asset('bundles/clerkio/css/exit-intent.css') }}" rel="stylesheet">
-		{% set contents = config('Clerkio.config.exitIntentRecommendationsContent') | split(',') %}
+		{% set contents = config('clerkio64.config.exitIntentRecommendationsContent') | split(',') %}
 		{% for content in contents %}
 			<span class="clerk clerk-popup clerk-popup-hidden container"
 			data-template="@{{ content | replace({ ' ': '' }) }}"

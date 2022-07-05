@@ -1,7 +1,7 @@
 {% sw_extends '@Storefront/storefront/page/checkout/cart/index.html.twig' %}
 {% block page_checkout_container %}
 	{{ parent() }}
-	{% if config('Clerkio.config.cartRecommendationsEnabled') == 'true' and not page.cart.lineItems.count is same as(0) %}
+	{% if config('clerkio64.config.cartRecommendationsEnabled') == 'true' and not page.cart.lineItems.count is same as(0) %}
 		{% set products = "[" %}
 
 		{% for product in page.cart.data.elements %}
@@ -16,7 +16,7 @@
 		{% endfor %}
 
 		{% set products = products ~ "]" %}
-		{% set contents = config('Clerkio.config.cartRecommendationsContent') | split(',') %}
+		{% set contents = config('clerkio64.config.cartRecommendationsContent') | split(',') %}
 
 		{% for content in contents %}
 			<span class="clerk" data-template="@{{ content | replace({' ': ''}) }}" data-products="{{ products }}"></span>

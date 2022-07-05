@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace CLERKIO\Clerkio\Core\Checkout\Event;
+namespace CLERKIO64\clerkio64\Core\Checkout\Event;
 
 use Shopware\Core\Checkout\Cart\Event\LineItemAddedEvent;
 use Shopware\Core\Framework\Struct\ArrayStruct;
