@@ -11,6 +11,10 @@
     {
       "name": "Casper Kromann Nielsen",
       "email": "ckn@clerk.io"
+    },
+    {
+      "name": "Alexander Bugge Stage",
+      "email": "abs@clerk.io"
     }
   ],
   "require": {
