@@ -2,7 +2,7 @@
   "name": "clerkio/clerkio",
   "description": "Clerk.io Shopware 6.4+ Plugin",
   "type": "shopware-platform-plugin",
-  "version": "v1.1.0",
+  "version": "v1.1.1",
   "license": "MIT",
   "authors": [
     {
@@ -11,6 +11,10 @@
     {
       "name": "Casper Kromann Nielsen",
       "email": "ckn@clerk.io"
+    },
+    {
+      "name": "Alexander Bugge Stage",
+      "email": "abs@clerk.io"
     }
   ],
   "extra": {
