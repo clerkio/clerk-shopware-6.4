@@ -17,6 +17,9 @@
       "email": "abs@clerk.io"
     }
   ],
+  "require": {
+    "shopware/core": "6.4.*"
+  },
   "extra": {
     "shopware-plugin-class": "CLERKIO\\Clerkio\\Clerkio",
     "plugin-icon": "src/Resources/config/plugin.png",
