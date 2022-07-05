@@ -2,16 +2,16 @@
 
 {% block layout_header_search %}
 	{{ parent() }}
-	{% if config('Clerkio.config.instantSearchEnabled') == 'true' %}
+	{% if config('clerkio64.config.instantSearchEnabled') == 'true' %}
 		<span
 				class="clerk"
-				data-template="@{{ config('Clerkio.config.instantSearchContent') }}"
-				data-instant-search-suggestions="{{ config('Clerkio.config.instantSearchNumberOfSuggestions') }}"
-				data-instant-search-categories="{{ config('Clerkio.config.instantSearchNumberOfCategories') }}"
-				data-instant-search-pages="{{ config('Clerkio.config.instantSearchNumberOfPages') }}"
-				data-instant-search-positioning="{{ config('Clerkio.config.instantSearchDropdownPositioning') ? config('Clerkio.config.instantSearchDropdownPositioning') : 'left' }}"
-				data-instant-search="{{ config('Clerkio.config.instantSearchInputSelector') ? config('Clerkio.config.instantSearchInputSelector') : '.header-search-input' }}"
-				data-instant-search-pages-type="{{ config('Clerkio.config.instantSearchPageTypes') ? config('Clerkio.config.instantSearchPageTypes') : 'all' }}">
+				data-template="@{{ config('clerkio64.config.instantSearchContent') }}"
+				data-instant-search-suggestions="{{ config('clerkio64.config.instantSearchNumberOfSuggestions') }}"
+				data-instant-search-categories="{{ config('clerkio64.config.instantSearchNumberOfCategories') }}"
+				data-instant-search-pages="{{ config('clerkio64.config.instantSearchNumberOfPages') }}"
+				data-instant-search-positioning="{{ config('clerkio64.config.instantSearchDropdownPositioning') ? config('clerkio64.config.instantSearchDropdownPositioning') : 'left' }}"
+				data-instant-search="{{ config('clerkio64.config.instantSearchInputSelector') ? config('clerkio64.config.instantSearchInputSelector') : '.header-search-input' }}"
+				data-instant-search-pages-type="{{ config('clerkio64.config.instantSearchPageTypes') ? config('clerkio64.config.instantSearchPageTypes') : 'all' }}">
 		</span>
 	{% endif %}
 {% endblock %}

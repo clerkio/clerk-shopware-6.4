@@ -1,5 +1,5 @@
 {
-  "name": "clerkio/clerkio",
+  "name": "clerkio64/clerkio64",
   "description": "Clerk.io Shopware 6.4+ Plugin",
   "type": "shopware-platform-plugin",
   "version": "v1.1.1",
@@ -21,7 +21,7 @@
     "shopware/core": "6.4.*"
   },
   "extra": {
-    "shopware-plugin-class": "CLERKIO\\Clerkio\\Clerkio",
+    "shopware-plugin-class": "CLERKIO64\\clerkio64\\clerkio64",
     "plugin-icon": "src/Resources/config/plugin.png",
     "copyright": "(c) by Clerk.io",
     "label": {
@@ -29,13 +29,13 @@
       "en-GB": "Clerk.io"
     },
     "description": {
-      "de-DE": "Clerk.io",
-      "en-GB": "Clerk.io"
+      "de-DE": "Die weltweit am besten bewertete E-Commerce Personalisierungsplattform! Clerk.io ermöglicht Personalisierung und Relevanz für Tausende von Online-Shops weltweit, um den Umsatz über die Website-Suche, Produktempfehlungen, E-Mails, soziale Medien und Anzeigen automatisch zu steigern.",
+      "en-GB": "The worlds #1 rated e-commerce personalisation platform! Clerk.io powers personalisation and relevance for thousands of online stores worldwide to automatically grow sales across site search, product recommendations, emails, social media & ads."
     }
   },
   "autoload": {
     "psr-4": {
-      "CLERKIO\\Clerkio\\": "src/"
+      "CLERKIO64\\clerkio64\\": "src/"
     }
   }
 }
