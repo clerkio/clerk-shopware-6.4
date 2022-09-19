@@ -1,0 +1,12 @@
+{% sw_extends '@Storefront/storefront/page/product-detail/description.html.twig' %}
+{% block page_product_detail_description_container %}
+	{% if config('clerkio64.config.productRecommendationsEnabled') == 'true' %}
+        {{ parent() }}
+		{% set contents = config('clerkio64.config.productRecommendationsContent') | split(',') %}
+		{% for content in contents %}
+			<span class="clerk" data-template="@{{ content | replace({' ': ''}) }}" data-products='["{{ page.product.parentId ? page.product.parentId : page.product.id }}"]'></span>
+		{% endfor %}
+	{% else %}
+		{{ parent() }}
+	{% endif %}
+{% endblock %}
