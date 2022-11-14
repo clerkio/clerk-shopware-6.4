@@ -31,4 +31,8 @@ class clerkio64 extends Plugin
         parent::deactivate($deactivateContext);
     }
 
+    public function uninstall(UninstallContext $uninstallContext): void
+    {
+        parent::uninstall($uninstallContext);
+    }
 }

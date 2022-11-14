@@ -37,6 +37,28 @@
             <label lang="de-DE"> </label>
         </component>
     </card>
+    <card>
+        <title>Add To Cart URLs</title>
+        <title lang="de-DE">Zum Warenkorb hinzufügen URLs</title>
+            <input-field type="single-select">
+                <name>addToCartEnabled</name>
+                <label>Status</label>
+                <label lang="de-DE">Status</label>
+                <options>
+                    <option>
+                        <id>true</id>
+                        <name>Enabled</name>
+                        <name lang="de-DE">Ermöglicht</name>
+                    </option>
+                    <option>
+                        <id>false</id>
+                        <name>Disabled</name>
+                        <name lang="de-DE">Behindert</name>
+                    </option>
+                </options>
+                <defaultValue>false</defaultValue>
+            </input-field>
+    </card> 
     <!--    Instant Search Settings    -->
     <card>
         <title>Instant Search Settings</title>
