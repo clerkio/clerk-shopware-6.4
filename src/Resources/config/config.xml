@@ -37,28 +37,32 @@
             <label lang="de-DE"> </label>
         </component>
     </card>
+
+    <!--    Extra Features Settings    -->
     <card>
-        <title>Add To Cart URLs</title>
-        <title lang="de-DE">Zum Warenkorb hinzufügen URLs</title>
-            <input-field type="single-select">
-                <name>addToCartEnabled</name>
-                <label>Status</label>
-                <label lang="de-DE">Status</label>
-                <options>
-                    <option>
-                        <id>true</id>
-                        <name>Enabled</name>
-                        <name lang="de-DE">Ermöglicht</name>
-                    </option>
-                    <option>
-                        <id>false</id>
-                        <name>Disabled</name>
-                        <name lang="de-DE">Behindert</name>
-                    </option>
-                </options>
-                <defaultValue>false</defaultValue>
-            </input-field>
-    </card> 
+        <title>Add to cart URL's</title>
+        <title lang="de-DE">Produktkauf-Links</title>
+        <input-field type="single-select">
+            <name>clerkAtcActive</name>
+            <label lang="de-DE">Aktiv</label>
+            <label>Enabled</label>
+            <options>
+            <option>
+            <id>n</id>
+            <name lang="de-DE">Nein</name>
+            <name>No</name>
+            </option>
+            <option>
+            <id>j</id>
+            <name lang="de-DE">Ja</name>
+            <name>Yes</name>
+            </option>
+            </options>
+            <defaultValue>n</defaultValue>
+            <required>true</required>
+        </input-field>
+    </card>
+
     <!--    Instant Search Settings    -->
     <card>
         <title>Instant Search Settings</title>

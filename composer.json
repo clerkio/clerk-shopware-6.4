@@ -18,7 +18,9 @@
     }
   ],
   "require": {
-    "shopware/core": "6.4.*"
+    "shopware/core": "^6.4",
+    "shopware/storefront": "^6.4",
+    "shopware/administration": "^6.4"
   },
   "extra": {
     "shopware-plugin-class": "CLERKIO64\\clerkio64\\clerkio64",

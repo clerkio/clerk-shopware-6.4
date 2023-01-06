@@ -1,8 +1,8 @@
 <?php
 
 /*
-sw64.stubbe.dev/tocart?ids=SW10001&qtys=5
-sw64.stubbe.dev/tocart?ids=SW10001,SW10002&qtys=5,2
+sw64.stubbe.dev/addtocart?ids=SW10001&qtys=5
+sw64.stubbe.dev/addtocart?ids=SW10001,SW10002&qtys=5,2
 */
 namespace CLERKIO64\clerkio64\Controller\Api;
 
@@ -73,7 +73,7 @@ class AddToCartController extends StorefrontController
   {
 
 
-    if ( $this->SystemConfigService->get('clerkio64.config.addToCartEnabled') == 'false' ) {
+    if ( $this->SystemConfigService->get('clerkio64.config.clerkAtcActive') == 'n' ) {
       return $this->RedirectToRoute('frontend.home.page');
     }
 
@@ -81,13 +81,13 @@ class AddToCartController extends StorefrontController
     $prod_qtys = explode(',', $Request->query->get('qtys') );
 
     /* to cart */
-    $this->addAccessories( $prod_ids, $prod_qtys, $SalesChannelContext );
+    $this->addaccessoryitems( $prod_ids, $prod_qtys, $SalesChannelContext );
 
     return $this->RedirectToRoute('frontend.checkout.cart.page');
 
   }
 
-  private function addAccessories(array $prod_ids, array $prod_qtys, SalesChannelContext $SalesChannelContext): void
+  private function addaccessoryitems(array $prod_ids, array $prod_qtys, SalesChannelContext $SalesChannelContext): void
   {
 
     foreach ($prod_ids as $key => $productNumber) {
