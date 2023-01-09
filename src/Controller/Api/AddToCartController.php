@@ -24,7 +24,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 
 /**
- * @RouteScope(scopes={"storefront"})
+ * @Route(defaults={"_routeScope"={"storefront"}})
  */
 class AddToCartController extends StorefrontController
 {
@@ -65,9 +65,9 @@ class AddToCartController extends StorefrontController
 
 
   /**
-   *  
-   * @Route(path="/api/addtocart", name="frontend.addtocart", methods={"GET"})
-   * 
+   *
+   * @Route(path="/addtocart", name="frontend.addtocart", methods={"GET"})
+   *
    */
   public function addtocart(Request $Request, RequestDataBag $DataBag, Context $Context, SalesChannelContext $SalesChannelContext): Response
   {
@@ -108,7 +108,7 @@ class AddToCartController extends StorefrontController
         $addtocart = $this->CartService->getCart( $SalesChannelContext->getToken(), $SalesChannelContext );
         $addtocart = $this->CartService->add( $addtocart, $item, $SalesChannelContext );
 
-      } 
+      }
 
     }
 
