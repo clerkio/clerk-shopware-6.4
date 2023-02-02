@@ -485,7 +485,25 @@
             </options>
             <defaultValue>false</defaultValue>
         </input-field>
-         <input-field type="text">
+        <input-field type="text">
+            <name>facetedSearchAttributes</name>
+            <label>Attributes</label>
+            <label lang="de-DE">Attribute</label>
+            <defaultValue>price,categories,brand</defaultValue>
+        </input-field>
+        <input-field type="text">
+            <name>facetedSearchAttributeTitles</name>
+            <label>Facet Titles</label>
+            <label lang="de-DE">Facettentitel</label>
+            <defaultValue>price:Price,categories:Categories,brand:Brand</defaultValue>
+        </input-field>
+        <input-field type="text">
+            <name>facetedSearchMultiSelectAttributes</name>
+            <label>Attributes</label>
+            <label lang="de-DE">Attribute</label>
+            <defaultValue>categories,brand</defaultValue>
+        </input-field>
+        <input-field type="text">
             <name>facetedSearchDesign</name>
             <label>Design</label>
             <label lang="de-DE">Entwurf</label>

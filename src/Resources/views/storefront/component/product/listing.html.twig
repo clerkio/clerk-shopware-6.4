@@ -1,6 +1,6 @@
 {% sw_extends '@Storefront/storefront/component/product/listing.html.twig' %}
 {% block product_listing %}
-	{% if config('clerkio64.config.categoryRecommendationsEnabled') == 'true' %}
+	{% if config('clerkio64.config.categoryRecommendationsEnabled') == 'true' && not page.searchTerm %}
 		{% set contents = config('clerkio64.config.categoryRecommendationsContent') | split(',') %}
 		{% for content in contents %}
 			<span class="clerk" data-template="@{{ content | replace({' ': ''}) }}" data-category="{{ page.header.navigation.active.id }}"></span>

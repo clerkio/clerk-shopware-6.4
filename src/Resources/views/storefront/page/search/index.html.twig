@@ -8,8 +8,6 @@
 					id="clerk-search"
 					class="clerk"
 					data-template="@{{ config('clerkio64.config.searchPageContent') ? config('clerkio64.config.searchPageContent')  : 'search-page' }}"
-					data-limit="40"
-					data-offset="0"
 					data-target="#clerk-search-results"
 					data-query="{{ page.searchTerm }}"
 			{% if config('clerkio64.config.searchCategoriesEnabled') == 'true' %}
@@ -18,8 +16,58 @@
 					data-serch-pages-types="{{config('clerkio64.config.searchPageTypes')}}"
 			{% endif %}		
 			{% if config('clerkio64.config.facetedSearchEnabled') == 'true' %}
+				{% set facetAttributes = config('clerkio64.config.facetedSearchAttributes')|split(',') %}
+				{% set facetAttributeTitles = config('clerkio64.config.facetedSearchAttributeTitles')|split(',') %}
+				{% set facetMultiSelectAttributes = config('clerkio64.config.facetedSearchMultiSelectAttributes')|split(',') %}
+				{% set quoteHtmlEntity = "&quot;" %}
+
+
+				{% set facetAttributesString = '' %}
+				{% set facetAttributeTitlesString = '' %}
+				{% set facetMultiSelectAttributesString = '' %}
+
+				{% for attribute in facetAttributes %}
+					{#
+					Build facet-attributes-string
+					#}
+					{% set facetAttributesString = "#{facetAttributesString}#{quoteHtmlEntity}#{attribute}#{quoteHtmlEntity}" %}
+					{% if not loop.last %}
+						{% set facetAttributesString = "#{facetAttributesString}," %}
+					{% endif %}
+				{% endfor %}
+
+				{% for attribute in facetAttributeTitles %}
+					{% if ':' in attribute %}
+						{% set split_attribute = attribute|split(':') %}
+						{% set attribute_slug = split_attribute.0 %}
+						{% set attribute_title = split_attribute.1 %}
+					{% else %}
+						{% set attribute_slug = attribute %}
+						{% set attribute_title = attribute %}
+					{% endif %}
+					{#
+					Build facet-attributes--titles-string
+					#}
+					{% set facetAttributeTitlesString = "#{facetAttributeTitlesString}#{quoteHtmlEntity}#{attribute_slug}#{quoteHtmlEntity}:#{quoteHtmlEntity}#{attribute_title}#{quoteHtmlEntity}" %}
+					{% if not loop.last %}
+						{% set facetAttributeTitlesString = "#{facetAttributeTitlesString}," %}
+					{% endif %}
+				{% endfor %}
+
+				{% for attribute in facetMultiSelectAttributes %}
+					{#
+					Build facet-multiselect-attributes-string
+					#}
+					{% set facetMultiSelectAttributesString = "#{facetMultiSelectAttributesString}#{quoteHtmlEntity}#{attribute}#{quoteHtmlEntity}" %}
+					{% if not loop.last %}
+						{% set facetMultiSelectAttributesString = "#{facetMultiSelectAttributesString}," %}
+					{% endif %}
+				{% endfor %}
+
 					data-facets-target="#clerk-search-filters"
-					data-facets-attributes='["price","categories","brand"]'
+					data-facets-attributes='[{{facetAttributesString}}]'
+					data-facets-titles="{ {{ facetAttributeTitlesString }} }"
+					data-facets-multiselect-attributes='[{{ facetMultiSelectAttributesString }}]'
 					data-facets-design="{{config('clerkio64.config.facetedSearchDesign')}}"
 			{% endif %}
 			></span>
