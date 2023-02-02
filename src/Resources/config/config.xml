@@ -499,8 +499,8 @@
         </input-field>
         <input-field type="text">
             <name>facetedSearchMultiSelectAttributes</name>
-            <label>Attributes</label>
-            <label lang="de-DE">Attribute</label>
+            <label>Multi Select Attributes</label>
+            <label lang="de-DE">Mehrfachauswahlattribut</label>
             <defaultValue>categories,brand</defaultValue>
         </input-field>
         <input-field type="text">
