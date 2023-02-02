@@ -13,13 +13,15 @@
 			{% if config('clerkio64.config.searchCategoriesEnabled') == 'true' %}
 					data-search-categories="{{config('clerkio64.config.searchNumberOfCategories')}}"
 					data-search-pages="{{config('clerkio64.config.searchNumberOfPages')}}"
-					data-serch-pages-types="{{config('clerkio64.config.searchPageTypes')}}"
+					{% if config('clerkio64.config.searchPageTypes') !== 'all' %}
+						data-serch-pages-types="{{config('clerkio64.config.searchPageTypes')}}"
+					{% endif %}
 			{% endif %}		
 			{% if config('clerkio64.config.facetedSearchEnabled') == 'true' %}
 				{% set facetAttributes = config('clerkio64.config.facetedSearchAttributes')|split(',') %}
 				{% set facetAttributeTitles = config('clerkio64.config.facetedSearchAttributeTitles')|split(',') %}
 				{% set facetMultiSelectAttributes = config('clerkio64.config.facetedSearchMultiSelectAttributes')|split(',') %}
-				{% set quoteHtmlEntity = "&quot;" %}
+				{% set quoteHtmlEntity = '"' %}
 
 
 				{% set facetAttributesString = '' %}
