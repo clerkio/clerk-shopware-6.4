@@ -1,6 +1,6 @@
 {% sw_extends '@Storefront/storefront/page/product-detail/index.html.twig' %}
 {% block page_product_detail_cross_selling %}
-	{% if config('clerkio64.config.productRecommendationsEnabled') == 'true' %}
+	{% if config('clerkio64.config.productRecommendationsEnabled') == 'true' && config('clerkio64.config.productRecommendationsLocation') == 'cross' %}
 		{% set contents = config('clerkio64.config.productRecommendationsContent') | split(',') %}
 		{% for content in contents %}
 			<span class="clerk" data-template="@{{ content | replace({' ': ''}) }}" data-products='["{{ page.product.parentId ? page.product.parentId : page.product.id }}"]'></span>

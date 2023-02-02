@@ -515,6 +515,24 @@
             </options>
             <defaultValue>false</defaultValue>
         </input-field>
+        <input-field type="single-select">
+            <name>productRecommendationsLocation</name>
+            <label>Hook Location</label>
+            <label lang="de-DE">Hook Platz</label>
+            <options>
+                <option>
+                    <id>cross</id>
+                    <name>Cross Selling Block</name>
+                    <name lang="de-DE">Cross-Selling Platz</name>
+                </option>
+                <option>
+                    <id>desc</id>
+                    <name>After Description</name>
+                    <name lang="de-DE">Nach Beschreibung</name>
+                </option>
+            </options>
+            <defaultValue>cross</defaultValue>
+        </input-field>
         <input-field type="text">
             <name>productRecommendationsContent</name>
             <label>Content</label>
