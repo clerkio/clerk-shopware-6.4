@@ -1,10 +1,19 @@
 {% sw_extends '@Storefront/storefront/page/checkout/finish/index.html.twig' %}
 {% block page_checkout_main_content %}
 	{{ parent() }}
+	{% set order_product_data = page.order.lineItems %}
+	{% set clerk_products = [] %}
+	{% for lineItem in order_product_data %}
+		{% set product_object = {} %}
+		{% set product_object = product_object|merge({"id": lineItem.productId}) %}
+		{% set product_object = product_object|merge({"price": lineItem.price.unitPrice}) %}
+		{% set product_object = product_object|merge({"quantity": lineItem.price.quantity}) %}
+		{% set clerk_products = clerk_products|merge([product_object]) %}
+	{% endfor %}
 	<span class="clerk"
 		data-api="log/sale"
 		data-sale="{{ page.order.orderNumber }}"
 		data-email="{{ page.order.orderCustomer.email }}"
-		data-products='{{ app.session.get('clerk_sale') }}'>
+		data-products='{{ clerk_products | json_encode(constant('JSON_PRETTY_PRINT')) }}'>
 	</span>
 {% endblock %}
