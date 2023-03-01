@@ -1,4 +1,4 @@
-import './service/ClerkApiTestService';
+import './service/clerkApiTestService';
 import './component/clerk-api-test-button';
 
 import localeDE from './snippet/de_DE.json';
