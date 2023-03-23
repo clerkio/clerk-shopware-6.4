@@ -2,7 +2,7 @@
 {% block layout_header %}
 	{{ parent() }}
 	{% if config('clerkio64.config.exitIntentRecommendationsEnabled') == 'true' %}
-		<link href="{{ asset('bundles/clerkio/css/exit-intent.css') }}" rel="stylesheet">
+		<link href="{{ asset('bundles/clerkio64/css/exit-intent.css') }}" rel="stylesheet">
 		{% set contents = config('clerkio64.config.exitIntentRecommendationsContent') | split(',') %}
 		{% for content in contents %}
 			<span class="clerk clerk-popup clerk-popup-hidden container"

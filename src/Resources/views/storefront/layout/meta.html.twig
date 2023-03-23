@@ -20,9 +20,9 @@
 	{% endif %}
 	{% if config('clerkio64.config.PowerstepRecommendationsEnabled') == 'true' %}
 		{% if config('clerkio64.config.PowerstepRecommendationsType') == 'popup' %}
-			<script src="{{ asset('bundles/clerkio/js/powerstep-popup.js') }}"></script>
+			<script src="{{ asset('bundles/clerkio64/js/powerstep-popup.js') }}"></script>
 		{% else %}
-			<script src="{{ asset('bundles/clerkio/js/powerstep-page.js') }}"></script>
+			<script src="{{ asset('bundles/clerkio64/js/powerstep-page.js') }}"></script>
 		{% endif %}
 	{% endif %}
 {% endblock %}

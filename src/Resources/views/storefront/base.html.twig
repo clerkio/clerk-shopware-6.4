@@ -3,9 +3,9 @@
 	{{ parent() }}
 	{% if config('clerkio64.config.PowerstepRecommendationsEnabled') == 'true' %}
 		{% if config('clerkio64.config.PowerstepRecommendationsType') == 'popup' %}
-			<link href="{{ asset('bundles/clerkio/css/powerstep-popup.css') }}" rel="stylesheet">
+			<link href="{{ asset('bundles/clerkio64/css/powerstep-popup.css') }}" rel="stylesheet">
 		{% else %}
-			<link href="{{ asset('bundles/clerkio/css/powerstep-page.css') }}" rel="stylesheet">
+			<link href="{{ asset('bundles/clerkio64/css/powerstep-page.css') }}" rel="stylesheet">
 		{% endif %}
 		<div id="clerk-powerstep" class="clerk-popup clerk-popup-hidden">
 			{% if config('clerkio64.config.PowerstepRecommendationsType') == 'page' %}
