@@ -17,9 +17,25 @@
 
 		{% set products = products ~ "]" %}
 		{% set contents = config('clerkio64.config.cartRecommendationsContent') | split(',') %}
-
-		{% for content in contents %}
-			<span class="clerk" data-template="@{{ content | replace({' ': ''}) }}" data-products="{{ products }}"></span>
-		{% endfor %}
+		{% if config('clerkio64.config.cartRecommendationsFilterDuplicates') == 'true' %}
+			{% set excludeString = '' %}
+			{% for content in contents %}
+				<span
+				class="clerk {{ 'clerk_' ~ loop.index0 }}"
+				data-template="@{{ content | replace({' ': ''}) }}"
+				{% if loop.first == false %}
+				data-exclude-from="{{ excludeString }}"
+				{% endif %}
+				data-products="{{ products }}"></span>
+				{% if loop.first == false %}
+					{% set excludeString = excludeString ~ ', ' %}
+				{% endif %}
+					{% set excludeString = excludeString ~ '.clerk_' ~ loop.index0 %}
+			{% endfor %}
+		{% else %}
+			{% for content in contents %}
+				<span class="clerk" data-template="@{{ content | replace({' ': ''}) }}" data-products="{{ products }}"></span>
+			{% endfor %}
+		{% endif %}
 	{% endif %}
 {% endblock %}

@@ -24,13 +24,33 @@
 					</button>
 				</div>
 				{% set contents = config('clerkio64.config.PowerstepRecommendationsContent') | split(',') %}
-				{% for content in contents %}
-					<span id="clerk-powerstep-{{ content | replace({ ' ': '' }) }}" class="clerk-powerstep-recommendation"
-						  data-template="@{{content}}"
-						  data-products=""
-						  data-category=""
-					></span>
-				{% endfor %}
+
+				{% if config('clerkio64.config.PowerstepRecommendationsFilterDuplicates') == 'true' %}
+					{% set excludeString = '' %}
+					{% for content in contents %}
+						<span id="clerk-powerstep-{{ content | replace({ ' ': '' }) }}"
+							class="clerk-powerstep-recommendation {{ 'clerk_powerstep_' ~ loop.index0 }}"
+							{% if loop.first == false %}
+							data-exclude-from="{{ excludeString }}"
+							{% endif %}
+							data-template="@{{content}}"
+							data-products=""
+							data-category=""
+						></span>
+						{% if loop.first == false %}
+							{% set excludeString = excludeString ~ ', ' %}
+						{% endif %}
+							{% set excludeString = excludeString ~ '.clerk_powerstep_' ~ loop.index0 %}
+					{% endfor %}
+				{% else %}
+					{% for content in contents %}
+						<span id="clerk-powerstep-{{ content | replace({ ' ': '' }) }}" class="clerk-powerstep-recommendation"
+							data-template="@{{content}}"
+							data-products=""
+							data-category=""
+						></span>
+					{% endfor %}
+				{% endif %}
 				{% if config('clerkio64.config.PowerstepRecommendationsType') == 'page' %}
 			</div>
 			{% endif %}

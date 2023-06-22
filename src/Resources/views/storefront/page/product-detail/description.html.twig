@@ -3,9 +3,26 @@
 	{% if config('clerkio64.config.productRecommendationsEnabled') == 'true' && config('clerkio64.config.productRecommendationsLocation') == 'desc' %}
         {{ parent() }}
 		{% set contents = config('clerkio64.config.productRecommendationsContent') | split(',') %}
-		{% for content in contents %}
-			<span class="clerk" data-template="@{{ content | replace({' ': ''}) }}" data-products='["{{ page.product.parentId ? page.product.parentId : page.product.id }}"]'></span>
-		{% endfor %}
+		{% if config('clerkio64.config.productRecommendationsFilterDuplicates') == 'true' %}
+			{% set excludeString = '' %}
+			{% for content in contents %}
+				<span
+				class="clerk {{ 'clerk_' ~ loop.index0 }}"
+				data-template="@{{ content | replace({' ': ''}) }}"
+				{% if loop.first == false %}
+				data-exclude-from="{{ excludeString }}"
+				{% endif %}
+				data-products='["{{ page.product.parentId ? page.product.parentId : page.product.id }}"]'></span>
+				{% if loop.first == false %}
+					{% set excludeString = excludeString ~ ', ' %}
+				{% endif %}
+					{% set excludeString = excludeString ~ '.clerk_' ~ loop.index0 %}
+			{% endfor %}
+		{% else %}
+			{% for content in contents %}
+				<span class="clerk" data-template="@{{ content | replace({' ': ''}) }}" data-products='["{{ page.product.parentId ? page.product.parentId : page.product.id }}"]'></span>
+			{% endfor %}
+		{% endif %}
 	{% else %}
 		{{ parent() }}
 	{% endif %}

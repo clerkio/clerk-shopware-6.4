@@ -557,6 +557,24 @@
             <label lang="de-DE">Inhalt</label>
             <defaultValue>product-page-alternatives,product-page-others-also-bought</defaultValue>
         </input-field>
+        <input-field type="single-select">
+            <name>productRecommendationsFilterDuplicates</name>
+            <label>Filter Duplicates</label>
+            <label lang="de-DE">Duplikate filtern</label>
+            <options>
+                <option>
+                    <id>true</id>
+                    <name>Enabled</name>
+                    <name lang="de-DE">Ermöglicht</name>
+                </option>
+                <option>
+                    <id>false</id>
+                    <name>Disabled</name>
+                    <name lang="de-DE">Behindert</name>
+                </option>
+            </options>
+            <defaultValue>false</defaultValue>
+        </input-field>
     </card>
 
     <!--    Category Settings    -->
@@ -587,6 +605,24 @@
             <label lang="de-DE">Inhalt</label>
             <defaultValue>category-page-popular</defaultValue>
         </input-field>
+        <input-field type="single-select">
+            <name>categoryRecommendationsFilterDuplicates</name>
+            <label>Filter Duplicates</label>
+            <label lang="de-DE">Duplikate filtern</label>
+            <options>
+                <option>
+                    <id>true</id>
+                    <name>Enabled</name>
+                    <name lang="de-DE">Ermöglicht</name>
+                </option>
+                <option>
+                    <id>false</id>
+                    <name>Disabled</name>
+                    <name lang="de-DE">Behindert</name>
+                </option>
+            </options>
+            <defaultValue>false</defaultValue>
+        </input-field>
     </card>
 
     <!--    Cart Settings    -->
@@ -616,6 +652,24 @@
             <label>Content</label>
             <label lang="de-DE">Inhalt</label>
             <defaultValue>cart-others-also-bought</defaultValue>
+        </input-field>
+        <input-field type="single-select">
+            <name>cartRecommendationsFilterDuplicates</name>
+            <label>Filter Duplicates</label>
+            <label lang="de-DE">Duplikate filtern</label>
+            <options>
+                <option>
+                    <id>true</id>
+                    <name>Enabled</name>
+                    <name lang="de-DE">Ermöglicht</name>
+                </option>
+                <option>
+                    <id>false</id>
+                    <name>Disabled</name>
+                    <name lang="de-DE">Behindert</name>
+                </option>
+            </options>
+            <defaultValue>false</defaultValue>
         </input-field>
     </card>
 
@@ -694,6 +748,24 @@
             <label>Content</label>
             <label lang="de-DE">Inhalt</label>
             <defaultValue>power-step-others-also-bought, power-step-visitor-complementary, power-step-popular, power-step-popular-on-sale</defaultValue>
+        </input-field>
+        <input-field type="single-select">
+            <name>PowerstepRecommendationsFilterDuplicates</name>
+            <label>Filter Duplicates</label>
+            <label lang="de-DE">Duplikate filtern</label>
+            <options>
+                <option>
+                    <id>true</id>
+                    <name>Enabled</name>
+                    <name lang="de-DE">Ermöglicht</name>
+                </option>
+                <option>
+                    <id>false</id>
+                    <name>Disabled</name>
+                    <name lang="de-DE">Behindert</name>
+                </option>
+            </options>
+            <defaultValue>false</defaultValue>
         </input-field>
     </card>
 </config>
