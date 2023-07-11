@@ -2,7 +2,42 @@
 
 {% block layout_head_javascript_tracking %}
 	{{ parent() }}
-	{% if config('clerkio64.config.enabled') == 'true' %}
+	{% set clerk_api_key = config('clerkio64.config.publicKey') %}
+	{% set clerk_language_id = context.salesChannel.get('languageId') %}
+	{% set clerk_custom_api_keys = config('clerkio64.config.customKeyConfig') %}
+	{% set clerk_selected_languages = config('clerkio64.config.selectedLanguages') %}
+	{% if clerk_custom_api_keys|length and clerk_selected_languages|length %}
+		{% set clerk_custom_api_keys = clerk_custom_api_keys | split('\n') %}
+		{% if clerk_custom_api_keys|length == clerk_selected_languages|length %}
+			{% for lang in clerk_selected_languages %}
+				{% if clerk_language_id == lang %}
+					{% set clerk_api_key = clerk_custom_api_keys[loop.index0] %}
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+	{% endif %}
+	{% if config('clerkio64.config.enabled') == 'true' and clerk_api_key %}
+		{% if not app.getSession().getLocale() is null %}
+			{% set clerk_locale = app.getSession().getLocale() %}
+		{% else %}
+			{% set clerk_locale = app.getRequest().getLocale() %}
+		{% endif %}
+
+		{% set clerk_tax_state = context.taxState %}
+		{% set clerk_tax_rate = 0 %}
+		{% set clerk_sales_channel_tax_rates = context.taxRules.elements %}
+		{% if clerk_sales_channel_tax_rates is iterable %}
+			{% for tax_rate in clerk_sales_channel_tax_rates %}
+				{% if tax_rate.position == 1 %}
+					{% set clerk_tax_rate = tax_rate.taxRate %}
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+		{% if context.shippingLocation.country.customerTax.enabled %}
+			{% set clerk_customer_tax_rate = context.shippingLocation.country.customerTax.amount %}
+		{% else %}
+			{% set clerk_customer_tax_rate = clerk_tax_rate %}
+		{% endif %}
 		<!-- Start of Clerk.io E-commerce Personalisation tool - www.clerk.io -->
 		<script type="text/javascript">
 		 (function(w,d){
@@ -13,7 +48,32 @@
 		 })(window,document);
 
 		 Clerk('config', {
-		  key: "{{ config('clerkio64.config.publicKey') }}"
+		  key: "{{ clerk_api_key }}",
+		  globals: {
+			locale: "{{ clerk_locale }}",
+			language_id: "{{ clerk_language_id }}",
+			tax_state: "{{ clerk_tax_state }}",
+			tax_rate: {{ clerk_tax_rate }},
+			customer_tax_rate: {{ clerk_customer_tax_rate }}
+		  },
+		  formatters: {
+			add_tax: function(price) {
+				const tax_rate = {{ clerk_tax_rate }};
+				if(tax_rate > 0){
+					return price * (1+(tax_rate/100));
+				} else {
+					return price;
+				}
+			},
+			remove_tax: function(price) {
+				const tax_rate = {{ clerk_tax_rate }};
+				if(tax_rate > 0){
+					return price / (1+(tax_rate/100));
+				} else {
+					return price;
+				}
+			}
+		  }
 		 });
 		</script>
 		<!-- End of Clerk.io E-commerce Personalisation tool - www.clerk.io -->

@@ -57,6 +57,22 @@
         </component>
     </card>
 
+    <card>
+        <title>Multi Language Key Config</title>
+        <title lang="de-DE">Mehrsprachige Schlüsselkonfiguration</title>
+        <component name="sw-entity-multi-id-select">
+            <name>selectedLanguages</name>
+            <entity>language</entity>
+            <label>Choose the languages you wish to override config for</label>
+            <label lang="de-DE">Wählen Sie die Sprachen aus, für die Sie die Konfiguration überschreiben möchten</label>
+        </component>
+        <input-field type="textarea">
+            <name>customKeyConfig</name>
+            <label>Provide public keys on each line in the same order of the chosen languages</label>
+            <label lang="de-DE">Geben Sie in jeder Zeile öffentliche Schlüssel in der gleichen Reihenfolge der ausgewählten Sprachen an</label>
+        </input-field>
+    </card>
+
     <!--    Extra Features Settings    -->
     <card>
         <title>Add to cart URL's</title>
