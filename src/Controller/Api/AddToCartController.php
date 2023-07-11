@@ -73,7 +73,7 @@ class AddToCartController extends StorefrontController
   {
 
 
-    if ( $this->SystemConfigService->get('clerkio64.config.clerkAtcActive') == 'n' ) {
+    if ( $this->SystemConfigService->get('clerkio64.config.clerkAtcActive') == 'false' ) {
       return $this->RedirectToRoute('frontend.home.page');
     }
 

@@ -3,6 +3,7 @@
 	{{ parent() }}
 	{% set order_product_data = page.order.lineItems %}
 	{% set clerk_products = [] %}
+	{% set clerk_order_email = page.order.orderCustomer.email %}
 	{% for lineItem in order_product_data %}
 		{% set product_object = {} %}
 		{% set product_object = product_object|merge({"id": lineItem.productId}) %}
@@ -10,6 +11,9 @@
 		{% set product_object = product_object|merge({"quantity": lineItem.price.quantity}) %}
 		{% set clerk_products = clerk_products|merge([product_object]) %}
 	{% endfor %}
+	{% if config('clerkio64.config.collectEmails') == 'false' %}
+		{% set clerk_order_email = '' %}
+	{% endif %}
 	<span class="clerk"
 		data-api="log/sale"
 		data-sale="{{ page.order.orderNumber }}"
