@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+    xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
     <!--    General Settings    -->
     <card>
         <title>General</title>
@@ -31,6 +31,25 @@
             <label>Private Key</label>
             <label lang="de-DE">Private Key</label>
         </input-field>
+        <input-field type="single-select">
+            <name>collectEmails</name>
+            <label lang="de-DE">E-Mails sammeln</label>
+            <label>Collect Emails</label>
+            <options>
+                <option>
+                    <id>false</id>
+                    <name lang="de-DE">Nein</name>
+                    <name>No</name>
+                </option>
+                <option>
+                    <id>true</id>
+                    <name lang="de-DE">Ja</name>
+                    <name>Yes</name>
+                </option>
+            </options>
+            <defaultValue>true</defaultValue>
+            <required>true</required>
+        </input-field>
         <component name="clerk-api-test-button">
             <name>apiTest</name>
             <label> </label>
@@ -47,18 +66,18 @@
             <label lang="de-DE">Aktiv</label>
             <label>Enabled</label>
             <options>
-            <option>
-            <id>n</id>
-            <name lang="de-DE">Nein</name>
-            <name>No</name>
-            </option>
-            <option>
-            <id>j</id>
-            <name lang="de-DE">Ja</name>
-            <name>Yes</name>
-            </option>
+                <option>
+                    <id>false</id>
+                    <name lang="de-DE">Nein</name>
+                    <name>No</name>
+                </option>
+                <option>
+                    <id>true</id>
+                    <name lang="de-DE">Ja</name>
+                    <name>Yes</name>
+                </option>
             </options>
-            <defaultValue>n</defaultValue>
+            <defaultValue>false</defaultValue>
             <required>true</required>
         </input-field>
     </card>
@@ -320,7 +339,7 @@
             </options>
             <defaultValue>false</defaultValue>
         </input-field>
-         <input-field type="single-select">
+        <input-field type="single-select">
             <name>searchCategoriesEnabled</name>
             <label>Include Categories</label>
             <label lang="de-DE">Kategorien einschließen</label>
