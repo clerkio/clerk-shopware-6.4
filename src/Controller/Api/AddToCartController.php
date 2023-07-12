@@ -12,7 +12,7 @@ use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
 use Shopware\Core\Framework\Validation\DataBag\RequestDataBag;
 use Shopware\Core\Framework\Routing\Annotation\RouteScope;
 use Shopware\Core\Framework\Context;
-use Shopware\Core\System\SalesChannel\Entity\SalesChannelRepositoryInterface;
+use Shopware\Core\System\SalesChannel\Entity\SalesChannelRepository;
 use Shopware\Core\System\SystemConfig\SystemConfigService;
 use Shopware\Core\System\SalesChannel\SalesChannelContext;
 use Shopware\Core\Content\Product\Cart\ProductLineItemFactory;
@@ -52,7 +52,7 @@ class AddToCartController extends StorefrontController
 
 
   public function __construct(
-    SalesChannelRepositoryInterface $SalesChannelRepository,
+    SalesChannelRepository $SalesChannelRepository,
     ProductLineItemFactory $ProductLineItemFactory,
     CartService $CartService,
     SystemConfigService $SystemConfigService
