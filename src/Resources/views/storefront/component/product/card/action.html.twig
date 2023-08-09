@@ -4,18 +4,10 @@
 	{% if config('clerkio64.config.PowerstepRecommendationsEnabled') == 'true' %}
 		{% if product.cover.media %}
 			{% set image = product.cover.media %}
-			<input type="hidden"
-				   name="product-image"
-				   value="{{ image.url }}">
+			<input type="hidden" name="product-image" value="{{ image.url }}">
 		{% endif %}
-		<input type="hidden"
-			   name="product-parentId"
-			   value="{{ product.parentId }}">
-		<input type="hidden"
-			   name="product-id"
-			   value="{{ product.id }}">
-		<input type="hidden"
-			   name="product-category"
-			   value="{{ product.categoryTree | last }}">
+		<input type="hidden" name="product-parentId" value="{{ product.parentId }}">
+		<input type="hidden" name="product-id" value="{{ product.id }}">
+		<input type="hidden" name="product-category" value="{{ product.categoryTree | last }}">
 	{% endif %}
 {% endblock %}
