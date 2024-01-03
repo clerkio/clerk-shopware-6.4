@@ -4,6 +4,7 @@
 	{{ parent() }}
 	{% set clerk_api_key = config('clerkio64.config.publicKey') %}
 	{% set clerk_language_id = context.salesChannel.get('languageId') %}
+	{% set clerk_js_custom_url = context.salesChannel.translated.name|lower|slug %}
 	{% set clerk_custom_api_keys = config('clerkio64.config.customKeyConfig') %}
 	{% set clerk_selected_languages = config('clerkio64.config.selectedLanguages') %}
 	{% if clerk_custom_api_keys|length and clerk_selected_languages|length %}
@@ -42,7 +43,7 @@
 		<script type="text/javascript">
 		 (function(w,d){
 		  var e=d.createElement('script');e.type='text/javascript';e.async=true;
-		  e.src=(d.location.protocol=='https:'?'https':'http')+'://cdn.clerk.io/clerk.js';
+		  e.src=(d.location.protocol=='https:'?'https':'http')+'://custom.clerk.io/{{ clerk_js_custom_url }}.js';
 		  var s=d.getElementsByTagName('script')[0];s.parentNode.insertBefore(e,s);
 		  w.__clerk_q=w.__clerk_q||[];w.Clerk=w.Clerk||function(){w.__clerk_q.push(arguments)};
 		 })(window,document);
