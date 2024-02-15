@@ -309,11 +309,11 @@
                 </option>
                 <option>
                     <id>below</id>
-                    <name>unterhalb</name>
+                    <name>below</name>
                 </option>
                 <option>
                     <id>off</id>
-                    <name>deaktiviert</name>
+                    <name>off</name>
                 </option>
             </options>
             <defaultValue>left</defaultValue>
@@ -806,5 +806,4 @@
         </input-field>
     </card>
 </config>
-
 
