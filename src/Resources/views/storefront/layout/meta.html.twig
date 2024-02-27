@@ -3,7 +3,7 @@
 {% block layout_head_javascript_tracking %}
 	{{ parent() }}
 	{% set clerk_api_key = config('clerkio64.config.publicKey') %}
-	{% set clerk_language_id = context.salesChannel.get('languageId') %}
+  {% set clerk_language_id = page.header.activeLanguage.id %}
 	{% set clerk_js_custom_url = context.salesChannel.translated.name|lower|slug %}
 	{% set clerk_custom_api_keys = config('clerkio64.config.customKeyConfig') %}
 	{% set clerk_selected_languages = config('clerkio64.config.selectedLanguages') %}
