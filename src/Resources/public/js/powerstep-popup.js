@@ -11,9 +11,9 @@ const init_clerk_powerstep = (event_target) => {
     const product_parent_id_input = event_target.querySelector('input[name=product-parentId]') ?? null;
     const product_id = product_parent_id_input?.value ?? product_id_input?.value;
 
-    const product_name = event_target.querySelector('input[name=product-name')?.value ?? '';
-    const product_category = event_target.querySelector('input[name=product-category')?.value ?? '';
-    const product_image = event_target.querySelector('input[name=product-image')?.value ?? '';
+    const product_name = event_target.querySelector('input[name=product-name]')?.value ?? '';
+    const product_category = event_target.querySelector('input[name=product-category]')?.value ?? '';
+    const product_image = event_target.querySelector('input[name=product-image]')?.value ?? '';
 
     var clerk_powerstep_header = $('#clerk_powerstep_header_h2');
     var clerk_powerstep_image = $('#clerk_powerstep_image_img');
