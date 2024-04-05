@@ -22,6 +22,6 @@
 		data-api="log/sale"
 		data-sale="{{ page.order.orderNumber }}"
 		data-email="{{ clerk_order_email }}"
-		data-products='{{ clerk_products | json_encode(constant('JSON_PRETTY_PRINT')) }}'>
+		data-products='{{ clerk_products | json_encode() }}'>
 	</span>
 {% endblock %}
