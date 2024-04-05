@@ -6,8 +6,8 @@
 	{% set clerk_order_email = page.order.orderCustomer.email %}
 	{% for lineItem in order_product_data %}
 		{% set product_object = {} %}
-    {% if lineItem.parentId %}
-		  {% set product_object = product_object|merge({"id": lineItem.parentId}) %}
+    {% if lineItem.payload.parentId %}
+		  {% set product_object = product_object|merge({"id": lineItem.payload.parentId}) %}
 		{% else %}
 		  {% set product_object = product_object|merge({"id": lineItem.productId}) %}
     {% endif %}
