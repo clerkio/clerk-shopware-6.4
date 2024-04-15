@@ -2,7 +2,43 @@
 
 {% block utilities_offcanvas_content %}
   {{ parent() }}
-  <div id="test-content-stubbe">
-    <p>HELLO</p>
+  <div id="clerk-powerstep-sidecart">
+	{% if config('clerkio64.config.PowerstepRecommendationsEnabled') == 'true' and config('clerkio64.config.PowerstepRecommendationsType') == 'sidecart' and not page.cart.lineItems.count is same as(0) %}
+		{% set products = "[" %}
+
+		{% for product in page.cart.data.elements %}
+			{% if product.productNumber %}
+				{% set productId = product.parentId ? product.parentId :  product.id %}
+				{% if products == "[" %}
+					{% set products = products ~ '"'~productId~'"' %}
+				{% else %}
+					{% set products = products ~ ',"'~productId~'"' %}
+				{% endif %}
+			{% endif %}
+		{% endfor %}
+
+		{% set products = products ~ "]" %}
+		{% set contents = config('clerkio64.config.PowerstepRecommendationsContent') | split(',') %}
+		{% if config('clerkio64.config.PowerstepRecommendationsFilterDuplicates') == 'true' %}
+			{% set excludeString = '' %}
+			{% for content in contents %}
+				<span
+				class="clerk {{ 'clerk_' ~ loop.index0 }}"
+				data-template="@{{ content | replace({' ': ''}) }}"
+				{% if loop.first == false %}
+				data-exclude-from="{{ excludeString }}"
+				{% endif %}
+				data-products="{{ products }}"></span>
+				{% if loop.first == false %}
+					{% set excludeString = excludeString ~ ', ' %}
+				{% endif %}
+					{% set excludeString = excludeString ~ '.clerk_' ~ loop.index0 %}
+			{% endfor %}
+		{% else %}
+			{% for content in contents %}
+				<span class="clerk" data-template="@{{ content | replace({' ': ''}) }}" data-products="{{ products }}"></span>
+			{% endfor %}
+		{% endif %}
+	{% endif %}
   </div>
 {% endblock %}

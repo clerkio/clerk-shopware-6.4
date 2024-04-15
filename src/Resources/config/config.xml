@@ -777,6 +777,11 @@
                     <name>Popup</name>
                     <name lang="de-DE">als Popup</name>
                 </option>
+                <option>
+                    <id>sidecart</id>
+                    <name>Side Cart</name>
+                    <name lang="de-DE">als Beistellwagen</name>
+                </option>
             </options>
             <defaultValue>popup</defaultValue>
         </input-field>
