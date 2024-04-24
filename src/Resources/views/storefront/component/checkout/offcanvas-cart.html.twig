@@ -23,7 +23,7 @@
 			{% set excludeString = '' %}
 			{% for content in contents %}
 				<span
-				class="clerk {{ 'clerk_' ~ loop.index0 }}"
+				class="clerk_powerstep {{ 'clerk_' ~ loop.index0 }}"
 				data-template="@{{ content | replace({' ': ''}) }}"
 				{% if loop.first == false %}
 				data-exclude-from="{{ excludeString }}"
@@ -36,9 +36,14 @@
 			{% endfor %}
 		{% else %}
 			{% for content in contents %}
-				<span class="clerk" data-template="@{{ content | replace({' ': ''}) }}" data-products="{{ products }}"></span>
+				<span class="clerk_powerstep" data-template="@{{ content | replace({' ': ''}) }}" data-products="{{ products }}"></span>
 			{% endfor %}
 		{% endif %}
 	{% endif %}
+  <script>
+  if(typeof window.Clerk == 'function'){
+    Clerk('content', '.clerk_powerstep');
+  }
+  </script>
   </div>
 {% endblock %}
