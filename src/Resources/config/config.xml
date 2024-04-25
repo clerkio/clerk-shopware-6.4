@@ -75,31 +75,6 @@
         </input-field>
     </card>
 
-    <!--    Extra Features Settings    -->
-    <card>
-        <title>Add to cart URL's</title>
-        <title lang="de-DE">Produktkauf-Links</title>
-        <input-field type="single-select">
-            <name>clerkAtcActive</name>
-            <label lang="de-DE">Aktiv</label>
-            <label>Enabled</label>
-            <options>
-                <option>
-                    <id>false</id>
-                    <name lang="de-DE">Nein</name>
-                    <name>No</name>
-                </option>
-                <option>
-                    <id>true</id>
-                    <name lang="de-DE">Ja</name>
-                    <name>Yes</name>
-                </option>
-            </options>
-            <defaultValue>false</defaultValue>
-            <required>true</required>
-        </input-field>
-    </card>
-
     <!--    Instant Search Settings    -->
     <card>
         <title>Instant Search Settings</title>
