@@ -76,6 +76,31 @@
 			}
 		  }
 		 });
+     function initShortCodes(){
+      const nodes = document.querySelectorAll(`*:contains('[[clerk@')`);
+      for(let i=0;i<nodes.length;i++){
+        const node = nodes[i];
+        const paramsRaw = node.innerText;
+        if(!validateShortCode(paramsRaw)){
+          continue;
+        }
+        const el = document.createElement('span');
+        el.className = "clerk_shortcode";
+        el.dataset.template = paramsRaw.split("clerk@")[1].replace("]]", "")
+        node.innerText = "";
+        node.append(el);
+      }
+      if(typeof window.Clerk == 'function'){
+        Clerk('content', '.clerk_shortcode');
+      }
+     }
+     function validateShortCode(str){
+      if(!str.startsWith('[[') || !str.endsWith(']]') || !str.includes('clerk@')){
+        return false;
+      }
+      return true;
+     }
+     initShortCodes();
 		</script>
 		<!-- End of Clerk.io E-commerce Personalisation tool - www.clerk.io -->
 	{% endif %}
