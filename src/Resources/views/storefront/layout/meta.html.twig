@@ -95,7 +95,7 @@
       }
      }
     function getElementsByText(str, tag = 'p') {
-      return Array.prototype.slice.call(document.querySelectorAll(tag)).filter(el => el.textContent.trim().startsWith(str.trim()));
+      return Array.prototype.slice.call(document.querySelectorAll(tag)).filter(el => el.textContent.trim().startsWith(str);
     }
      function validateShortCode(str){
       if(!str.startsWith('[[') || !str.endsWith(']]') || !str.includes('clerk@')){
@@ -103,7 +103,9 @@
       }
       return true;
      }
-     initShortCodes();
+     document.addEventListener("DOMContentLoaded", (e) => {
+      initShortCodes();
+     });
 		</script>
 		<!-- End of Clerk.io E-commerce Personalisation tool - www.clerk.io -->
 	{% endif %}
