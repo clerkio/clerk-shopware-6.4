@@ -77,7 +77,7 @@
 		  }
 		 });
      function initShortCodes(){
-      const nodes = document.querySelectorAll(`*:contains('[[clerk@')`);
+      const nodes = getElementsByText('[[clerk@');
       for(let i=0;i<nodes.length;i++){
         const node = nodes[i];
         const paramsRaw = node.innerText;
@@ -94,6 +94,9 @@
         Clerk('content', '.clerk_shortcode');
       }
      }
+    function getElementsByText(str, tag = 'p') {
+      return Array.prototype.slice.call(document.querySelectorAll(tag)).filter(el => el.textContent.trim().startsWith(str.trim()));
+    }
      function validateShortCode(str){
       if(!str.startsWith('[[') || !str.endsWith(']]') || !str.includes('clerk@')){
         return false;
