@@ -95,7 +95,7 @@
       }
      }
     function getElementsByText(str, tag = 'p') {
-      return Array.prototype.slice.call(document.querySelectorAll(tag)).filter(el => el.textContent.trim().startsWith(str);
+      return Array.prototype.slice.call(document.querySelectorAll(tag)).filter(el => el.textContent.trim().startsWith(str));
     }
      function validateShortCode(str){
       if(!str.startsWith('[[') || !str.endsWith(']]') || !str.includes('clerk@')){
