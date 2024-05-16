@@ -86,7 +86,11 @@
         }
         const el = document.createElement('span');
         el.className = "clerk_shortcode";
-        el.dataset.template = paramsRaw.split("clerk@")[1].replace("]]", "")
+        let template = paramsRaw.split("clerk@")[1].replace("]]", "");
+        if(!template.startsWith("@")){
+          template = `@${template}`;
+        }
+        el.dataset.template = template;
         node.innerText = "";
         node.append(el);
       }
@@ -94,9 +98,9 @@
         Clerk('content', '.clerk_shortcode');
       }
      }
-    function getElementsByText(str, tag = 'p') {
-      return Array.prototype.slice.call(document.querySelectorAll(tag)).filter(el => el.textContent.trim().startsWith(str));
-    }
+     function getElementsByText(str, tag = 'p') {
+       return Array.prototype.slice.call(document.querySelectorAll(tag)).filter(el => el.textContent.trim().startsWith(str));
+     }
      function validateShortCode(str){
       if(!str.startsWith('[[') || !str.endsWith(']]') || !str.includes('clerk@')){
         return false;
