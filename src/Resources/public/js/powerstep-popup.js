@@ -1,10 +1,10 @@
 const init_clerk_powerstep = (event_target) => {
-    var popup = $("#clerk-powerstep");
+    var popup = document.querySelector("#clerk-powerstep");
 
-    $("body").click(function() {
-        if (popup.is(":visible")) {
-            popup.hide();
-        }
+    document.body.addEventListener("click", (event) => {
+      if(!!( popup.offsetWidth || popup.offsetHeight || popup.getClientRects().length )) {
+        popup.style.display = "none";
+      }
     });
 
     const product_id_input = event_target.querySelector('input[name=product-id]') ?? null;
@@ -15,24 +15,41 @@ const init_clerk_powerstep = (event_target) => {
     const product_category = event_target.querySelector('input[name=product-category]')?.value ?? '';
     const product_image = event_target.querySelector('input[name=product-image]')?.value ?? '';
 
-    var clerk_powerstep_header = $('#clerk_powerstep_header_h2');
-    var clerk_powerstep_image = $('#clerk_powerstep_image_img');
+    const clerk_powerstep_header = document.querySelector('#clerk_powerstep_header_h2');
+    const clerk_powerstep_image = document.querySelector('#clerk_powerstep_image_img');
 
-    clerk_powerstep_header.text(product_name+' added to cart');
-    clerk_powerstep_image.attr("src", product_image);
-    clerk_powerstep_image.attr("alt", product_name);
+    clerk_powerstep_header.textContent = `${product_name} added to cart`;
+    clerk_powerstep_image.src = product_image;
+    clerk_powerstep_image.alt = product_name;
 
-    $('.clerk-powerstep-recommendation').each(function( index ) {
-        $(this).attr('data-products','["'+product_id+'"]');
-        $(this).attr('data-category', product_category);
-        Clerk('content','#clerk-powerstep-'+ $(this).data('template').replace('@',''));
+    document.querySelectorAll('.clerk-powerstep-recommendation').forEach(el => {
+      el.dataset.products = `["${product_id}"]`;
+      el.dataset.category = product_category;
+      const span_id = el.dataset?.template ? el.dataset?.template.replace('@', '') : '';
+      Clerk('content',`#clerk-powerstep-${span_id}`);
     });
 
-    popup.show();
-    $(".offcanvas").toggle();
-    setTimeout(function(){
-        $(".modal-backdrop").toggle();
-        $('html').removeClass('no-scroll');
+    popup.style.display = 'block';
+
+    const offcanvas = document.querySelector(".offcanvas");
+    if(offcanvas){
+      if(offcanvas.style.display == "none"){
+        offcanvas.removeAttribute("style");
+      } else {
+        offcanvas.style.display = "none";
+      }
+    }
+
+    setTimeout(() => {
+      const modal_backdrop = document.querySelector(".modal-backdrop");
+      if(modal_backdrop){
+        if(modal_backdrop.style.display == "none"){
+          modal_backdrop.removeAttribute("style");
+        } else {
+          modal_backdrop.style.display = "none";
+        }
+      }
+      document.documentElement.classList.remove('no-scroll');
     }, 100);
 }
 
