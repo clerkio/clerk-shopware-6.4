@@ -2,7 +2,7 @@
   "name": "clerkio64/clerkio64",
   "description": "Clerk.io Shopware 6.4+ Plugin",
   "type": "shopware-platform-plugin",
-  "version": "v1.2.3",
+  "version": "v1.2.4",
   "license": "MIT",
   "authors": [
     {
