@@ -1,4 +1,4 @@
-const { Component, Mixin } = Shopware;
+const {Component, Mixin} = Shopware;
 import template from './clerk-api-test-button.html.twig';
 
 Component.register('clerk-api-test-button', {

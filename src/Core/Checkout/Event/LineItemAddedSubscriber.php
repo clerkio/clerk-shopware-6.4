@@ -12,13 +12,13 @@ class LineItemAddedSubscriber implements EventSubscriberInterface
 {
     public static function getSubscribedEvents(): array
     {
-        return[
+        return [
             LineItemAddedEvent::class => 'onLineItemAdded',
         ];
     }
 
     public function onLineItemAdded(LineItemAddedEvent $event): void
     {
-        $event->getContext()->addExtension('product_count',new ArrayStruct());
+        $event->getContext()->addExtension('product_count', new ArrayStruct());
     }
 }

@@ -18,19 +18,14 @@ class ApiTestController
     public function check(RequestDataBag $dataBag): JsonResponse
     {
         $publickey = $dataBag->get('clerkio64.config.publicKey');
-        $privatKey = $dataBag->get('clerkio64.config.privateKey');
-
-        $success = false;
-
-        $url = 'https://api.clerk.io/v2/client/account/info?key='.$publickey.'&private_key='.$privatKey;
+        $url = 'https://api.clerk.io/v2/recommendations/popular?key=' . $publickey;
 
         //Use file_get_contents to GET the URL in question.
         $contents = json_decode(file_get_contents($url));
 
         if ($contents->status == 'ok') {
-            $success = true;
+            return new JsonResponse(['success' => true]);
         }
-
-        return new JsonResponse(['success' => $success]);
+        return new JsonResponse(['success' => false]);
     }
 }

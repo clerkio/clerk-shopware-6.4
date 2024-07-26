@@ -1,6 +1,6 @@
 (this.webpackJsonp = this.webpackJsonp || []).push([
     ["clerk-api-test"], {
-        OA1K: function(t, e, s) {
+        OA1K: function (t, e, s) {
             "use strict";
             s.r(e);
             s("x+9I");
@@ -15,7 +15,9 @@
                 props: ["label"],
                 inject: ["clerkApiTest"],
                 mixins: [c.getByName("notification")],
-                mounted() { document.getElementsByClassName('sw-meteor-page__smart-bar-title')[0].innerHTML = 'Clerk.io' },
+                mounted() {
+                    document.getElementsByClassName('sw-meteor-page__smart-bar-title')[0].innerHTML = 'Clerk.io'
+                },
                 data: () => ({
                     isLoading: !1,
                     isSaveSuccessful: !1
@@ -48,24 +50,26 @@
                 r = s("SGsY");
             Shopware.Locale.extend("de-DE", a), Shopware.Locale.extend("en-GB", r)
         },
-        SGsY: function(t) {
+        SGsY: function (t) {
             t.exports = JSON.parse('{"clerk-api-test-button":{"title":"API Test","success":"Connection was successfully tested","error":"Connection could not be established. Please check the access data","button":"Test API Keys"}}')
         },
-        Skhm: function(t) {
+        Skhm: function (t) {
             t.exports = JSON.parse('{"clerk-api-test-button":{"title":"API Test","success":"Verbindung wurde erfolgreich getestet","error":"Verbindung konnte nicht hergestellt werden. Bitte prüfe die Zugangsdaten","button":"Test API Keys"}}')
         },
-        moSR: function(t, e) {
+        moSR: function (t, e) {
             t.exports = '<div>\n    <sw-button-process\n        :isLoading="isLoading"\n        :processSuccess="isSaveSuccessful"\n        @process-finish="saveFinish"\n        @click="check"\n    >{{ $tc(\'clerk-api-test-button.button\') }}</sw-button-process>\n</div>\n'
         },
-        "x+9I": function(t, e) {
+        "x+9I": function (t, e) {
             const s = Shopware.Classes.ApiService,
                 {
                     Application: i
                 } = Shopware;
+
             class n extends s {
                 constructor(t, e, s = "clerk-api-test") {
                     super(t, e, s)
                 }
+
                 check(t) {
                     const e = this.getBasicHeaders({});
                     return this.httpClient.post(`_action/${this.getApiBasePath()}/verify`, t, {
@@ -73,6 +77,7 @@
                     }).then(t => s.handleResponse(t))
                 }
             }
+
             i.addServiceProvider("clerkApiTest", t => {
                 const e = i.getContainer("init");
                 return new n(e.httpClient, t.loginService)

@@ -1,5 +1,5 @@
 const ApiService = Shopware.Classes.ApiService;
-const { Application } = Shopware;
+const {Application} = Shopware;
 
 class ApiClient extends ApiService {
     constructor(httpClient, loginService, apiEndpoint = 'clerk-api-test') {
@@ -10,7 +10,7 @@ class ApiClient extends ApiService {
         const headers = this.getBasicHeaders({});
 
         return this.httpClient
-            .post(`_action/${this.getApiBasePath()}/verify`, values,{
+            .post(`_action/${this.getApiBasePath()}/verify`, values, {
                 headers
             })
             .then((response) => {

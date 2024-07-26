@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
     <!--    General Settings    -->
     <card>
         <title>General</title>
@@ -54,8 +54,8 @@
         </input-field>
         <component name="clerk-api-test-button">
             <name>apiTest</name>
-            <label> </label>
-            <label lang="de-DE"> </label>
+            <label></label>
+            <label lang="de-DE"></label>
         </component>
     </card>
 
@@ -71,7 +71,9 @@
         <input-field type="textarea">
             <name>customKeyConfig</name>
             <label>Provide public keys on each line in the same order of the chosen languages</label>
-            <label lang="de-DE">Geben Sie in jeder Zeile öffentliche Schlüssel in der gleichen Reihenfolge der ausgewählten Sprachen an</label>
+            <label lang="de-DE">Geben Sie in jeder Zeile öffentliche Schlüssel in der gleichen Reihenfolge der
+                ausgewählten Sprachen an
+            </label>
         </input-field>
     </card>
 
@@ -764,7 +766,9 @@
             <name>PowerstepRecommendationsContent</name>
             <label>Content</label>
             <label lang="de-DE">Inhalt</label>
-            <defaultValue>power-step-others-also-bought, power-step-visitor-complementary, power-step-popular, power-step-popular-on-sale</defaultValue>
+            <defaultValue>power-step-others-also-bought, power-step-visitor-complementary, power-step-popular,
+                power-step-popular-on-sale
+            </defaultValue>
         </input-field>
         <input-field type="single-select">
             <name>PowerstepRecommendationsFilterDuplicates</name>

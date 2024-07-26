@@ -1,42 +1,42 @@
 {% sw_extends '@Storefront/storefront/page/checkout/finish/index.html.twig' %}
 {% block page_checkout_main_content %}
-	{{ parent() }}
-	{% set order_product_data = page.order.lineItems %}
-	{% set clerk_products = [] %}
-	{% set clerk_order_email = page.order.orderCustomer.email %}
-  {% set continue = false %}
-	{% for lineItem in order_product_data %}
+    {{ parent() }}
+    {% set order_product_data = page.order.lineItems %}
+    {% set clerk_products = [] %}
+    {% set clerk_order_email = page.order.orderCustomer.email %}
+    {% set continue = false %}
+    {% for lineItem in order_product_data %}
 
-		{% set product_object = {} %}
-    {% set product_id = '' %}
+        {% set product_object = {} %}
+        {% set product_id = '' %}
 
-    {% if lineItem.payload.parentId %}
-      {% set product_id = lineItem.payload.parentId %}
-		{% else %}
-      {% set product_id = lineItem.productId %}
+        {% if lineItem.payload.parentId %}
+            {% set product_id = lineItem.payload.parentId %}
+        {% else %}
+            {% set product_id = lineItem.productId %}
+        {% endif %}
+
+        {% if not product_id %}
+            {% set continue = true %}
+        {% else %}
+            {% set continue = false %}
+        {% endif %}
+
+        {% if not continue %}
+            {% set product_object = product_object|merge({"id": product_id}) %}
+            {% set product_object = product_object|merge({"price": lineItem.price.unitPrice}) %}
+            {% set product_object = product_object|merge({"quantity": lineItem.price.quantity}) %}
+            {% set clerk_products = clerk_products|merge([product_object]) %}
+        {% endif %}
+
+    {% endfor %}
+    {% if config('clerkio64.config.collectEmails') == 'false' %}
+        {% set clerk_order_email = '' %}
     {% endif %}
-
-    {% if not product_id %}
-      {% set continue = true %}
-    {% else %}
-      {% set continue = false %}
-    {% endif %}
-
-    {% if not continue %}
-      {% set product_object = product_object|merge({"id": product_id}) %}
-      {% set product_object = product_object|merge({"price": lineItem.price.unitPrice}) %}
-      {% set product_object = product_object|merge({"quantity": lineItem.price.quantity}) %}
-      {% set clerk_products = clerk_products|merge([product_object]) %}
-    {% endif %}
-
-	{% endfor %}
-	{% if config('clerkio64.config.collectEmails') == 'false' %}
-		{% set clerk_order_email = '' %}
-	{% endif %}
-	<span class="clerk"
-		data-api="log/sale"
-		data-sale="{{ page.order.orderNumber }}"
-		data-email="{{ clerk_order_email }}"
-		data-products='{{ clerk_products | json_encode() }}'>
+    <span class="clerk"
+          data-api="log/sale"
+          data-sale="{{ page.order.orderNumber }}"
+          data-email="{{ clerk_order_email }}"
+          data-products='{{ clerk_products | json_encode() }}'>
 	</span>
 {% endblock %}

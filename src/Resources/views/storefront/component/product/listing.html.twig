@@ -1,27 +1,28 @@
 {% sw_extends '@Storefront/storefront/component/product/listing.html.twig' %}
 {% block product_listing %}
-	{% if config('clerkio64.config.categoryRecommendationsEnabled') == 'true' && not page.searchTerm %}
-		{% set contents = config('clerkio64.config.categoryRecommendationsContent') | split(',') %}
-		{% if config('clerkio64.config.categoryRecommendationsFilterDuplicates') == 'true' %}
-			{% set excludeString = '' %}
-			{% for content in contents %}
-				<span
-				class="clerk {{ 'clerk_' ~ loop.index0 }}"
-				data-template="@{{ content | replace({' ': ''}) }}"
+    {% if config('clerkio64.config.categoryRecommendationsEnabled') == 'true' and not page.searchTerm %}
+        {% set contents = config('clerkio64.config.categoryRecommendationsContent') | split(',') %}
+        {% if config('clerkio64.config.categoryRecommendationsFilterDuplicates') == 'true' %}
+            {% set excludeString = '' %}
+            {% for content in contents %}
+                <span
+                        class="clerk {{ 'clerk_' ~ loop.index0 }}"
+                        data-template="@{{ content | replace({' ': ''}) }}"
 				{% if loop.first == false %}
-				data-exclude-from="{{ excludeString }}"
-				{% endif %}
+                    data-exclude-from="{{ excludeString }}"
+                {% endif %}
 				data-category="{{ page.navigationId }}"></span>
-				{% if loop.first == false %}
-					{% set excludeString = excludeString ~ ', ' %}
-				{% endif %}
-					{% set excludeString = excludeString ~ '.clerk_' ~ loop.index0 %}
-			{% endfor %}
-		{% else %}
-			{% for content in contents %}
-				<span class="clerk" data-template="@{{ content | replace({' ': ''}) }}" data-category="{{ page.navigationId }}"></span>
-			{% endfor %}
-		{% endif %}
-	{% endif %}
-	{{ parent() }}
+                {% if loop.first == false %}
+                    {% set excludeString = excludeString ~ ', ' %}
+                {% endif %}
+                {% set excludeString = excludeString ~ '.clerk_' ~ loop.index0 %}
+            {% endfor %}
+        {% else %}
+            {% for content in contents %}
+                <span class="clerk" data-template="@{{ content | replace({' ': ''}) }}"
+                      data-category="{{ page.navigationId }}"></span>
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+    {{ parent() }}
 {% endblock %}

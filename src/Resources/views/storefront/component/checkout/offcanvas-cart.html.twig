@@ -1,49 +1,50 @@
 {% sw_extends '@Storefront/storefront/component/checkout/offcanvas-cart.html.twig' %}
 
 {% block utilities_offcanvas_content %}
-  {{ parent() }}
-  <div id="clerk-powerstep-sidecart">
-	{% if config('clerkio64.config.PowerstepRecommendationsEnabled') == 'true' and config('clerkio64.config.PowerstepRecommendationsType') == 'sidecart' and not page.cart.lineItems.count is same as(0) %}
-		{% set products = "[" %}
+    {{ parent() }}
+    <div id="clerk-powerstep-sidecart">
+        {% if config('clerkio64.config.PowerstepRecommendationsEnabled') == 'true' and config('clerkio64.config.PowerstepRecommendationsType') == 'sidecart' and not page.cart.lineItems.count is same as(0) %}
+            {% set products = "[" %}
 
-		{% for product in page.cart.data.elements %}
-			{% if product.productNumber %}
-				{% set productId = product.parentId ? product.parentId :  product.id %}
-				{% if products == "[" %}
-					{% set products = products ~ '"'~productId~'"' %}
-				{% else %}
-					{% set products = products ~ ',"'~productId~'"' %}
-				{% endif %}
-			{% endif %}
-		{% endfor %}
+            {% for product in page.cart.data.elements %}
+                {% if product.productNumber %}
+                    {% set productId = product.parentId ? product.parentId :  product.id %}
+                    {% if products == "[" %}
+                        {% set products = products ~ '"'~productId~'"' %}
+                    {% else %}
+                        {% set products = products ~ ',"'~productId~'"' %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
 
-		{% set products = products ~ "]" %}
-		{% set contents = config('clerkio64.config.PowerstepRecommendationsContent') | split(',') %}
-		{% if config('clerkio64.config.PowerstepRecommendationsFilterDuplicates') == 'true' %}
-			{% set excludeString = '' %}
-			{% for content in contents %}
-				<span
-				class="clerk_powerstep {{ 'clerk_' ~ loop.index0 }}"
-				data-template="@{{ content | replace({' ': ''}) }}"
+            {% set products = products ~ "]" %}
+            {% set contents = config('clerkio64.config.PowerstepRecommendationsContent') | split(',') %}
+            {% if config('clerkio64.config.PowerstepRecommendationsFilterDuplicates') == 'true' %}
+                {% set excludeString = '' %}
+                {% for content in contents %}
+                    <span
+                            class="clerk_powerstep {{ 'clerk_' ~ loop.index0 }}"
+                            data-template="@{{ content | replace({' ': ''}) }}"
 				{% if loop.first == false %}
-				data-exclude-from="{{ excludeString }}"
-				{% endif %}
+                    data-exclude-from="{{ excludeString }}"
+                {% endif %}
 				data-products="{{ products }}"></span>
-				{% if loop.first == false %}
-					{% set excludeString = excludeString ~ ', ' %}
-				{% endif %}
-					{% set excludeString = excludeString ~ '.clerk_' ~ loop.index0 %}
-			{% endfor %}
-		{% else %}
-			{% for content in contents %}
-				<span class="clerk_powerstep" data-template="@{{ content | replace({' ': ''}) }}" data-products="{{ products }}"></span>
-			{% endfor %}
-		{% endif %}
-	{% endif %}
-  <script>
-  if(typeof window.Clerk == 'function'){
-    Clerk('content', '.clerk_powerstep');
-  }
-  </script>
-  </div>
+                    {% if loop.first == false %}
+                        {% set excludeString = excludeString ~ ', ' %}
+                    {% endif %}
+                    {% set excludeString = excludeString ~ '.clerk_' ~ loop.index0 %}
+                {% endfor %}
+            {% else %}
+                {% for content in contents %}
+                    <span class="clerk_powerstep" data-template="@{{ content | replace({' ': ''}) }}"
+                          data-products="{{ products }}"></span>
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+        <script>
+            if (typeof window.Clerk == 'function') {
+                Clerk('content', '.clerk_powerstep');
+            }
+        </script>
+    </div>
 {% endblock %}

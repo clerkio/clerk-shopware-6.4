@@ -1,41 +1,42 @@
 {% sw_extends '@Storefront/storefront/page/checkout/cart/index.html.twig' %}
 {% block page_checkout_container %}
-	{{ parent() }}
-	{% if config('clerkio64.config.cartRecommendationsEnabled') == 'true' and not page.cart.lineItems.count is same as(0) %}
-		{% set products = "[" %}
+    {{ parent() }}
+    {% if config('clerkio64.config.cartRecommendationsEnabled') == 'true' and not page.cart.lineItems.count is same as(0) %}
+        {% set products = "[" %}
 
-		{% for product in page.cart.data.elements %}
-			{% if product.productNumber %}
-				{% set productId = product.parentId ? product.parentId :  product.id %}
-				{% if products == "[" %}
-					{% set products = products ~ '"'~productId~'"' %}
-				{% else %}
-					{% set products = products ~ ',"'~productId~'"' %}
-				{% endif %}
-			{% endif %}
-		{% endfor %}
+        {% for product in page.cart.data.elements %}
+            {% if product.productNumber %}
+                {% set productId = product.parentId ? product.parentId :  product.id %}
+                {% if products == "[" %}
+                    {% set products = products ~ '"'~productId~'"' %}
+                {% else %}
+                    {% set products = products ~ ',"'~productId~'"' %}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
 
-		{% set products = products ~ "]" %}
-		{% set contents = config('clerkio64.config.cartRecommendationsContent') | split(',') %}
-		{% if config('clerkio64.config.cartRecommendationsFilterDuplicates') == 'true' %}
-			{% set excludeString = '' %}
-			{% for content in contents %}
-				<span
-				class="clerk {{ 'clerk_' ~ loop.index0 }}"
-				data-template="@{{ content | replace({' ': ''}) }}"
+        {% set products = products ~ "]" %}
+        {% set contents = config('clerkio64.config.cartRecommendationsContent') | split(',') %}
+        {% if config('clerkio64.config.cartRecommendationsFilterDuplicates') == 'true' %}
+            {% set excludeString = '' %}
+            {% for content in contents %}
+                <span
+                        class="clerk {{ 'clerk_' ~ loop.index0 }}"
+                        data-template="@{{ content | replace({' ': ''}) }}"
 				{% if loop.first == false %}
-				data-exclude-from="{{ excludeString }}"
-				{% endif %}
+                    data-exclude-from="{{ excludeString }}"
+                {% endif %}
 				data-products="{{ products }}"></span>
-				{% if loop.first == false %}
-					{% set excludeString = excludeString ~ ', ' %}
-				{% endif %}
-					{% set excludeString = excludeString ~ '.clerk_' ~ loop.index0 %}
-			{% endfor %}
-		{% else %}
-			{% for content in contents %}
-				<span class="clerk" data-template="@{{ content | replace({' ': ''}) }}" data-products="{{ products }}"></span>
-			{% endfor %}
-		{% endif %}
-	{% endif %}
+                {% if loop.first == false %}
+                    {% set excludeString = excludeString ~ ', ' %}
+                {% endif %}
+                {% set excludeString = excludeString ~ '.clerk_' ~ loop.index0 %}
+            {% endfor %}
+        {% else %}
+            {% for content in contents %}
+                <span class="clerk" data-template="@{{ content | replace({' ': ''}) }}"
+                      data-products="{{ products }}"></span>
+            {% endfor %}
+        {% endif %}
+    {% endif %}
 {% endblock %}

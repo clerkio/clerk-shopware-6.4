@@ -1,8 +1,8 @@
 {
-    "clerk-api-test-button": {
-        "title": "API Test",
-        "success": "Verbindung wurde erfolgreich getestet",
-        "error": "Verbindung konnte nicht hergestellt werden. Bitte prüfe die Zugangsdaten",
-        "button": "Test API Keys"
-    }
+  "clerk-api-test-button": {
+    "title": "API Test",
+    "success": "Verbindung wurde erfolgreich getestet",
+    "error": "Verbindung konnte nicht hergestellt werden. Bitte prüfe die Zugangsdaten",
+    "button": "Test API Keys"
+  }
 }

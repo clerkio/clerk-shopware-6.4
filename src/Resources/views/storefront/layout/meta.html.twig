@@ -1,123 +1,143 @@
 {% sw_extends '@Storefront/storefront/layout/meta.html.twig' %}
 
 {% block layout_head_javascript_tracking %}
-	{{ parent() }}
-	{% set clerk_api_key = config('clerkio64.config.publicKey') %}
-  {% set clerk_language_id = page.header.activeLanguage.id %}
-	{% set clerk_js_custom_url = context.salesChannel.translated.name|lower|slug %}
-	{% set clerk_custom_api_keys = config('clerkio64.config.customKeyConfig') %}
-	{% set clerk_selected_languages = config('clerkio64.config.selectedLanguages') %}
-	{% if clerk_custom_api_keys|length and clerk_selected_languages|length %}
-		{% set clerk_custom_api_keys = clerk_custom_api_keys | split('\n') %}
-		{% if clerk_custom_api_keys|length == clerk_selected_languages|length %}
-			{% for lang in clerk_selected_languages %}
-				{% if clerk_language_id == lang %}
-					{% set clerk_api_key = clerk_custom_api_keys[loop.index0] %}
-				{% endif %}
-			{% endfor %}
-		{% endif %}
-	{% endif %}
-	{% if config('clerkio64.config.enabled') == 'true' and clerk_api_key %}
-		{% if not app.getSession().getLocale() is null %}
-			{% set clerk_locale = app.getSession().getLocale() %}
-		{% else %}
-			{% set clerk_locale = app.getRequest().getLocale() %}
-		{% endif %}
+    {{ parent() }}
+    {% set clerk_api_key = config('clerkio64.config.publicKey') %}
+    {% set clerk_language_id = page.header.activeLanguage.id %}
+    {% set clerk_js_custom_url = context.salesChannel.translated.name|lower|slug %}
+    {% set clerk_custom_api_keys = config('clerkio64.config.customKeyConfig') %}
+    {% set clerk_selected_languages = config('clerkio64.config.selectedLanguages') %}
+    {% if clerk_custom_api_keys|length and clerk_selected_languages|length %}
+        {% set clerk_custom_api_keys = clerk_custom_api_keys | split('\n') %}
+        {% if clerk_custom_api_keys|length == clerk_selected_languages|length %}
+            {% for lang in clerk_selected_languages %}
+                {% if clerk_language_id == lang %}
+                    {% set clerk_api_key = clerk_custom_api_keys[loop.index0] %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+    {% if config('clerkio64.config.enabled') == 'true' and clerk_api_key %}
+        {% if not app.getSession().getLocale() is null %}
+            {% set clerk_locale = app.getSession().getLocale() %}
+        {% else %}
+            {% set clerk_locale = app.getRequest().getLocale() %}
+        {% endif %}
 
-		{% set clerk_tax_state = context.taxState %}
-		{% set clerk_tax_rate = 0 %}
-		{% set clerk_sales_channel_tax_rates = context.taxRules.elements %}
-		{% if clerk_sales_channel_tax_rates is iterable %}
-			{% for tax_rate in clerk_sales_channel_tax_rates %}
-				{% if tax_rate.position == 1 %}
-					{% set clerk_tax_rate = tax_rate.taxRate %}
-				{% endif %}
-			{% endfor %}
-		{% endif %}
-		{% if context.shippingLocation.country.customerTax.enabled %}
-			{% set clerk_customer_tax_rate = context.shippingLocation.country.customerTax.amount %}
-		{% else %}
-			{% set clerk_customer_tax_rate = clerk_tax_rate %}
-		{% endif %}
-		<!-- Start of Clerk.io E-commerce Personalisation tool - www.clerk.io -->
-		<script type="text/javascript">
-		 (function(w,d){
-		  var e=d.createElement('script');e.type='text/javascript';e.async=true;
-		  e.src=(d.location.protocol=='https:'?'https':'http')+'://custom.clerk.io/{{ clerk_js_custom_url }}.js';
-		  var s=d.getElementsByTagName('script')[0];s.parentNode.insertBefore(e,s);
-		  w.__clerk_q=w.__clerk_q||[];w.Clerk=w.Clerk||function(){w.__clerk_q.push(arguments)};
-		 })(window,document);
+        {% set clerk_tax_state = context.taxState %}
+        {% set clerk_tax_rate = 0 %}
+        {% set clerk_sales_channel_tax_rates = context.taxRules.elements %}
+        {% if clerk_sales_channel_tax_rates is iterable %}
+            {% for tax_rate in clerk_sales_channel_tax_rates %}
+                {% if tax_rate.position == 1 %}
+                    {% set clerk_tax_rate = tax_rate.taxRate %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        {% if context.shippingLocation.country.customerTax.enabled %}
+            {% set clerk_customer_tax_rate = context.shippingLocation.country.customerTax.amount %}
+        {% else %}
+            {% set clerk_customer_tax_rate = clerk_tax_rate %}
+        {% endif %}
+        <!-- Start of Clerk.io E-commerce Personalisation tool - www.clerk.io -->
+        <script type="text/javascript">
+            (function (w, d) {
+                var e = d.createElement('script');
+                e.type = 'text/javascript';
+                e.async = true;
+                e.src = (d.location.protocol == 'https:' ? 'https' : 'http') + '://custom.clerk.io/{{ clerk_js_custom_url }}.js';
+                var s = d.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(e, s);
+                w.__clerk_q = w.__clerk_q || [];
+                w.Clerk = w.Clerk || function () {
+                    w.__clerk_q.push(arguments)
+                };
+            })(window, document);
 
-		 Clerk('config', {
-		  key: "{{ clerk_api_key }}",
-		  globals: {
-			locale: "{{ clerk_locale }}",
-			language_id: "{{ clerk_language_id }}",
-			tax_state: "{{ clerk_tax_state }}",
-			tax_rate: {{ clerk_tax_rate }},
-			customer_tax_rate: {{ clerk_customer_tax_rate }}
-		  },
-		  formatters: {
-			add_tax: function(price) {
-				const tax_rate = {{ clerk_tax_rate }};
-				if(tax_rate > 0){
-					return price * (1+(tax_rate/100));
-				} else {
-					return price;
-				}
-			},
-			remove_tax: function(price) {
-				const tax_rate = {{ clerk_tax_rate }};
-				if(tax_rate > 0){
-					return price / (1+(tax_rate/100));
-				} else {
-					return price;
-				}
-			}
-		  }
-		 });
-     function initShortCodes(){
-      const nodes = getElementsByText('[[clerk@');
-      for(let i=0;i<nodes.length;i++){
-        const node = nodes[i];
-        const paramsRaw = node.innerText;
-        if(!validateShortCode(paramsRaw)){
-          continue;
-        }
-        const el = document.createElement('span');
-        el.className = "clerk_shortcode";
-        let template = paramsRaw.split("clerk@")[1].replace("]]", "");
-        if(!template.startsWith("@")){
-          template = `@${template}`;
-        }
-        el.dataset.template = template;
-        node.innerText = "";
-        node.append(el);
-      }
-      if(typeof window.Clerk == 'function'){
-        Clerk('content', '.clerk_shortcode');
-      }
-     }
-     function getElementsByText(str, tag = 'p') {
-       return Array.prototype.slice.call(document.querySelectorAll(tag)).filter(el => el.textContent.trim().startsWith(str));
-     }
-     function validateShortCode(str){
-      if(!str.startsWith('[[') || !str.endsWith(']]') || !str.includes('clerk@')){
-        return false;
-      }
-      return true;
-     }
-     document.addEventListener("DOMContentLoaded", (e) => {
-      initShortCodes();
-     });
-		</script>
-		<!-- End of Clerk.io E-commerce Personalisation tool - www.clerk.io -->
-	{% endif %}
-	{% if config('clerkio64.config.PowerstepRecommendationsEnabled') == 'true' %}
-		{% if config('clerkio64.config.PowerstepRecommendationsType') == 'popup' %}
-			<script src="{{ asset('bundles/clerkio64/js/powerstep-popup.js') }}"></script>
-		{% else %}
-			<script src="{{ asset('bundles/clerkio64/js/powerstep-page.js') }}"></script>
-		{% endif %}
-	{% endif %}
+            Clerk('config', {
+                key: "{{ clerk_api_key }}",
+                globals: {
+                    locale: "{{ clerk_locale }}",
+                    language_id: "{{ clerk_language_id }}",
+                    tax_state: "{{ clerk_tax_state }}",
+                    tax_rate: {{ clerk_tax_rate }},
+                    customer_tax_rate: {{ clerk_customer_tax_rate }}
+                },
+                formatters: {
+                    add_tax: function (price) {
+                        const tax_rate = {{ clerk_tax_rate }};
+                        if (tax_rate > 0) {
+                            return price * (1 + (tax_rate / 100));
+                        } else {
+                            return price;
+                        }
+                    },
+                    remove_tax: function (price) {
+                        const tax_rate = {{ clerk_tax_rate }};
+                        if (tax_rate > 0) {
+                            return price / (1 + (tax_rate / 100));
+                        } else {
+                            return price;
+                        }
+                    }
+                }
+            });
+
+            {% if context.customer and config('clerkio64.config.collectEmails') == 'true' %}
+            {% if context.customer.email %}
+            if (typeof window.Clerk == 'function') {
+                Clerk('call', 'log/email', {
+                    email: "{{ context.customer.email }}"
+                });
+            }
+            {% endif %}
+            {% endif %}
+
+            function initShortCodes() {
+                const nodes = getElementsByText('[[clerk@');
+                for (let i = 0; i < nodes.length; i++) {
+                    const node = nodes[i];
+                    const paramsRaw = node.innerText;
+                    if (!validateShortCode(paramsRaw)) {
+                        continue;
+                    }
+                    const el = document.createElement('span');
+                    el.className = "clerk_shortcode";
+                    let template = paramsRaw.split("clerk@")[1].replace("]]", "");
+                    if (!template.startsWith("@")) {
+                        template = `@${template}`;
+                    }
+                    el.dataset.template = template;
+                    node.innerText = "";
+                    node.append(el);
+                }
+                if (typeof window.Clerk == 'function') {
+                    Clerk('content', '.clerk_shortcode');
+                }
+            }
+
+            function getElementsByText(str, tag = 'p') {
+                return Array.prototype.slice.call(document.querySelectorAll(tag)).filter(el => el.textContent.trim().startsWith(str));
+            }
+
+            function validateShortCode(str) {
+                if (!str.startsWith('[[') || !str.endsWith(']]') || !str.includes('clerk@')) {
+                    return false;
+                }
+                return true;
+            }
+
+            document.addEventListener("DOMContentLoaded", (e) => {
+                initShortCodes();
+            });
+        </script>
+        <!-- End of Clerk.io E-commerce Personalisation tool - www.clerk.io -->
+    {% endif %}
+    {% if config('clerkio64.config.PowerstepRecommendationsEnabled') == 'true' %}
+        {% if config('clerkio64.config.PowerstepRecommendationsType') == 'popup' %}
+            <script src="{{ asset('bundles/clerkio64/js/powerstep-popup.js') }}"></script>
+        {% else %}
+            <script src="{{ asset('bundles/clerkio64/js/powerstep-page.js') }}"></script>
+        {% endif %}
+    {% endif %}
 {% endblock %}
