@@ -54,8 +54,8 @@
         </input-field>
         <component name="clerk-api-test-button">
             <name>apiTest</name>
-            <label></label>
-            <label lang="de-DE"></label>
+            <label>Test API</label>
+            <label lang="de-DE">Testen Sie die API</label>
         </component>
     </card>
 
