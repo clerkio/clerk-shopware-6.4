@@ -14,9 +14,13 @@ const init_clerk_powerstep = (event_target) => {
     const clerk_powerstep_header = document.querySelector('#clerk_powerstep_header_h2');
     const clerk_powerstep_image = document.querySelector('#clerk_powerstep_image_img');
 
-    clerk_powerstep_header.textContent = `${product_name} added to cart`;
-    clerk_powerstep_image.src = product_image;
-    clerk_powerstep_image.alt = product_name;
+    if(clerk_powerstep_header){
+      clerk_powerstep_header.textContent = `${product_name} added to cart`;
+    }
+    if(clerk_powerstep_image){
+      clerk_powerstep_image.src = product_image;
+      clerk_powerstep_image.alt = product_name;
+    }
 
     document.querySelectorAll('.clerk-powerstep-recommendation').forEach(el => {
         el.dataset.products = `["${product_id}"]`;
@@ -25,13 +29,19 @@ const init_clerk_powerstep = (event_target) => {
         Clerk('content', `#clerk-powerstep-${span_id}`);
     });
 
-    pageContent.forEach(el => {
+    if(pageContent){
+      pageContent.forEach(el => {
         el.style.display = "none";
-    })
-    cmsPageContent.forEach(el => {
+      })
+    }
+    if(cmsPageContent){
+      cmsPageContent.forEach(el => {
         el.style.display = "none";
-    })
-    page.style.display = 'contents';
+      })
+    }
+    if(page){
+      page.style.display = 'contents';
+    }
 
     const offcanvas = document.querySelector(".offcanvas");
     if (offcanvas) {
