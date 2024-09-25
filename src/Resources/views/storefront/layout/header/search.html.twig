@@ -2,7 +2,7 @@
 
 {% block layout_header_search %}
     {{ parent() }}
-    {% if config('clerkio64.config.instantSearchEnabled') == 'true' %}
+    {% if config('clerkio64.config.instantSearchEnabled') == 'true' and config('clerkio64.config.instantSearchInjectionPosition') == 'header-search' %}
         <span
                 class="clerk"
                 data-template="@{{ config('clerkio64.config.instantSearchContent') }}"

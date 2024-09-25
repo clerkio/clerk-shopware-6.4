@@ -99,6 +99,26 @@
             </options>
             <defaultValue>false</defaultValue>
         </input-field>
+
+        <input-field type="single-select">
+            <name>instantSearchInjectionPosition</name>
+            <label>Position</label>
+            <label lang="de-DE">Position</label>
+            <options>
+                <option>
+                    <id>meta</id>
+                    <name>MetaBlock</name>
+                    <name lang="de-DE">MetaBlock</name>
+                </option>
+                <option>
+                    <id>header-search</id>
+                    <name>HeaderSearchBlock</name>
+                    <name lang="de-DE">HeaderSearchBlock</name>
+                </option>
+            </options>
+            <defaultValue>meta</defaultValue>
+        </input-field>
+
         <input-field type="single-select">
             <name>instantSearchNumberOfSuggestions</name>
             <label>Number Of Suggestions</label>
