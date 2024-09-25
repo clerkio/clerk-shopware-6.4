@@ -140,4 +140,16 @@
             <script src="{{ asset('bundles/clerkio64/js/powerstep-page.js') }}"></script>
         {% endif %}
     {% endif %}
+    {% if config('clerkio64.config.instantSearchEnabled') == 'true' and config('clerkio64.config.instantSearchInjectionPosition') == 'meta' %}
+        <span
+                class="clerk"
+                data-template="@{{ config('clerkio64.config.instantSearchContent') }}"
+                data-instant-search-suggestions="{{ config('clerkio64.config.instantSearchNumberOfSuggestions') }}"
+                data-instant-search-categories="{{ config('clerkio64.config.instantSearchNumberOfCategories') }}"
+                data-instant-search-pages="{{ config('clerkio64.config.instantSearchNumberOfPages') }}"
+                data-instant-search-positioning="{{ config('clerkio64.config.instantSearchDropdownPositioning') ? config('clerkio64.config.instantSearchDropdownPositioning') : 'left' }}"
+                data-instant-search="{{ config('clerkio64.config.instantSearchInputSelector') ? config('clerkio64.config.instantSearchInputSelector') : '.header-search-input' }}"
+                data-instant-search-pages-type="{{ config('clerkio64.config.instantSearchPageTypes') ? config('clerkio64.config.instantSearchPageTypes') : 'all' }}">
+		</span>
+    {% endif %}
 {% endblock %}
