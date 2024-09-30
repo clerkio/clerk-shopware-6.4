@@ -54,8 +54,8 @@
         </input-field>
         <component name="clerk-api-test-button">
             <name>apiTest</name>
-            <label>Test API</label>
-            <label lang="de-DE">Testen Sie die API</label>
+            <label> </label>
+            <label lang="de-DE"> </label>
         </component>
     </card>
 
@@ -106,17 +106,27 @@
             <label lang="de-DE">Position</label>
             <options>
                 <option>
+                    <id>header-search</id>
+                    <name>HeaderSearchBlock</name>
+                    <name lang="de-DE">HeaderSearchBlock</name>
+                </option>
+                <option>
                     <id>meta</id>
                     <name>MetaBlock</name>
                     <name lang="de-DE">MetaBlock</name>
                 </option>
                 <option>
-                    <id>header-search</id>
-                    <name>HeaderSearchBlock</name>
-                    <name lang="de-DE">HeaderSearchBlock</name>
+                    <id>footer</id>
+                    <name>Footer</name>
+                    <name lang="de-DE">Footer</name>
+                </option>
+                <option>
+                    <id>footer-minimal</id>
+                    <name>FooterMinimal</name>
+                    <name lang="de-DE">FooterMinimal</name>
                 </option>
             </options>
-            <defaultValue>meta</defaultValue>
+            <defaultValue>header-search</defaultValue>
         </input-field>
 
         <input-field type="single-select">
