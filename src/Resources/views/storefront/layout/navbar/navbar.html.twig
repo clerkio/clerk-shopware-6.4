@@ -1,8 +1,8 @@
-{% sw_extends '@Storefront/storefront/layout/footer/footer-minimal.html.twig' %}
+{% sw_extends '@storefront/storefront/layout/navbar/navbar.html.twig' %}
 
-{% block layout_footer_minimal_instant_search %}
+{% block layout_navbar_instant_search %}
     {{ parent() }}
-    {% if config('clerkio64.config.instantSearchEnabled') == 'true' and config('clerkio64.config.instantSearchInjectionPosition') == 'footer-minimal' %}
+    {% if config('clerkio64.config.instantSearchEnabled') == 'true' and config('clerkio64.config.instantSearchInjectionPosition') == 'navbar' %}
         <span
                 class="clerk"
                 data-template="@{{ config('clerkio64.config.instantSearchContent') }}"

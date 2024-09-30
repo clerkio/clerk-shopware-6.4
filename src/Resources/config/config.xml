@@ -125,6 +125,11 @@
                     <name>FooterMinimal</name>
                     <name lang="de-DE">FooterMinimal</name>
                 </option>
+                <option>
+                    <id>navbar</id>
+                    <name>Navbar</name>
+                    <name lang="de-DE">Navbar</name>
+                </option>
             </options>
             <defaultValue>header-search</defaultValue>
         </input-field>
@@ -292,7 +297,8 @@
             <options>
                 <option>
                     <id>all</id>
-                    <name>Alle</name>
+                    <name>All</name>
+                    <name lang="de-DE">Alle</name>
                 </option>
             </options>
             <defaultValue>all</defaultValue>
@@ -304,23 +310,28 @@
             <options>
                 <option>
                     <id>left</id>
-                    <name>links</name>
+                    <name>left</name>
+                    <name lang="de-DE">links</name>
                 </option>
                 <option>
                     <id>center</id>
-                    <name>mittig</name>
+                    <name>center</name>
+                    <name lang="de-DE">mittig</name>
                 </option>
                 <option>
                     <id>right</id>
-                    <name>rechts</name>
+                    <name>right</name>
+                    <name lang="de-DE">rechts</name>
                 </option>
                 <option>
                     <id>below</id>
                     <name>below</name>
+                    <name lang="de-DE">unter</name>
                 </option>
                 <option>
                     <id>off</id>
                     <name>off</name>
+                    <name lang="de-DE">aus</name>
                 </option>
             </options>
             <defaultValue>left</defaultValue>

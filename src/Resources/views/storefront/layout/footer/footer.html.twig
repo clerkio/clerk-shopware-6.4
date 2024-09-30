@@ -1,6 +1,7 @@
 {% sw_extends '@Storefront/storefront/layout/footer/footer.html.twig' %}
 
 {% block layout_footer_instant_search %}
+    {{ parent() }}
     {% if config('clerkio64.config.instantSearchEnabled') == 'true' and config('clerkio64.config.instantSearchInjectionPosition') == 'footer' %}
         <span
                 class="clerk"
