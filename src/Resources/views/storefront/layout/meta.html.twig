@@ -143,7 +143,6 @@
     {% if config('clerkio64.config.instantSearchEnabled') == 'true' and config('clerkio64.config.instantSearchInjectionPosition') == 'meta' %}
         <span
                 class="clerk clerk-move-to-body"
-
                 data-template="@{{ config('clerkio64.config.instantSearchContent') }}"
                 data-instant-search-suggestions="{{ config('clerkio64.config.instantSearchNumberOfSuggestions') }}"
                 data-instant-search-categories="{{ config('clerkio64.config.instantSearchNumberOfCategories') }}"
@@ -151,19 +150,19 @@
                 data-instant-search-positioning="{{ config('clerkio64.config.instantSearchDropdownPositioning') ? config('clerkio64.config.instantSearchDropdownPositioning') : 'left' }}"
                 data-instant-search="{{ config('clerkio64.config.instantSearchInputSelector') ? config('clerkio64.config.instantSearchInputSelector') : '.header-search-input' }}"
                 data-instant-search-pages-type="{{ config('clerkio64.config.instantSearchPageTypes') ? config('clerkio64.config.instantSearchPageTypes') : 'all' }}">
-		</span>
-    <script>
-      ((w, d) => {
-        const move = d.querySelectorAll(".clerk-move-to-body");
-        if(move){
-          move.forEach(el => {
-            document.body.appendChild(el);
-          })
-          if(typeof w.Clerk == 'function'){
-            w.Clerk("content", ".clerk-move-to-body");
-          }
-        }
-      })(window, document);
-    </script>
+        </span>
+        <script>
+          ((w, d) => {
+            const move = d.querySelectorAll(".clerk-move-to-body");
+            if(move){
+              move.forEach(el => {
+                document.body.appendChild(el);
+              })
+              if(typeof w.Clerk == 'function'){
+                w.Clerk("content", ".clerk-move-to-body");
+              }
+            }
+          })(window, document);
+        </script>
     {% endif %}
 {% endblock %}
