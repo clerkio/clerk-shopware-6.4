@@ -41,6 +41,10 @@
                 {% endfor %}
             {% endif %}
         {% endif %}
-        <style onload="if(typeof window.Clerk == 'function'){Clerk('content', '.clerk_powerstep');}"></style>
+        <style onload="if(typeof window.Clerk == 'function'){Clerk('content', '.clerk_powerstep');}">
+            .clerk_powerstep {
+                display: inline-block;
+            }
+        </style>
     </div>
 {% endblock %}
