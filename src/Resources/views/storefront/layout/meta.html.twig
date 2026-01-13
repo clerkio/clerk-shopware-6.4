@@ -83,6 +83,13 @@
                 }
             });
 
+            // Clerk.js Context
+            Clerk('context', {
+                product: {% if page.product.id is defined and page.product.id %}'{{ page.product.id }}'{% else %}null{% endif %},
+                category: {% if page.category.id is defined and page.category.id %}'{{ page.category.id }}'{% elseif page.navigationId is defined and page.navigationId %}'{{ page.navigationId }}'{% else %}null{% endif %},
+                page: {% if page.product.id is defined and page.product.id %}null{% elseif page.category.id is defined and page.category.id %}null{% elseif page.navigationId is defined and page.navigationId %}null{% else %}'{{ controllerName|default("home") }}'{% endif %}
+            });
+
             {% if context.customer and config('clerkio64.config.collectEmails') == 'true' %}
             {% if context.customer.email %}
             if (typeof window.Clerk == 'function') {
