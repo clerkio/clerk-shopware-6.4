@@ -2,23 +2,24 @@
 
 namespace CLERKIO64\clerkio64\Core\Checkout\Event;
 
-use Shopware\Core\Checkout\Cart\Event\LineItemAddedEvent;
 use Shopware\Core\Framework\Struct\ArrayStruct;
-use Shopware\Core\Framework\Struct\Struct;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 class LineItemAddedSubscriber implements EventSubscriberInterface
 {
     public static function getSubscribedEvents(): array
     {
         return [
-            LineItemAddedEvent::class => 'onLineItemAdded',
+            'Shopware\\Core\\Checkout\\Cart\\Event\\LineItemAddedEvent' => 'onLineItemAdded',
         ];
     }
 
-    public function onLineItemAdded(LineItemAddedEvent $event): void
+    public function onLineItemAdded(object $event): void
     {
+        if (!method_exists($event, 'getContext')) {
+            return;
+        }
+
         $event->getContext()->addExtension('product_count', new ArrayStruct());
     }
 }
