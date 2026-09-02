@@ -2,7 +2,7 @@
 
 The official [Clerk.io](https://clerk.io) plugin for Shopware 6. It connects your store to Clerk.io's AI platform, giving you personalized search, product recommendations, and visitor tracking.
 
-**Version:** 1.2.9 · **PHP:** 7.4+ · **Shopware:** 6.4+
+**Version:** 1.2.10 · **PHP:** 7.4+ · **Shopware:** 6.4+
 
 ---
 
