@@ -18,10 +18,6 @@ Component.register('clerk-api-test-button', {
         };
     },
 
-    mounted() {
-        console.log('Mounted bitch')
-    },
-
     computed: {
         pluginConfig() {
             let $parent = this.$parent;

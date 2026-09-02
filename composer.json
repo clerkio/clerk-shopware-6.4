@@ -31,8 +31,16 @@
       "en-GB": "Clerk.io"
     },
     "description": {
-      "de-DE": "Die weltweit am besten bewertete E-Commerce Personalisierungsplattform! Clerk.io ermöglicht Personalisierung und Relevanz für Tausende von Online-Shops weltweit, um den Umsatz über die Website-Suche, Produktempfehlungen, E-Mails, soziale Medien und Anzeigen automatisch zu steigern.",
-      "en-GB": "The worlds #1 rated e-commerce personalisation platform! Clerk.io powers personalisation and relevance for thousands of online stores worldwide to automatically grow sales across site search, product recommendations, emails, social media & ads."
+      "de-DE": "Clerk.io ist die E-Commerce-Personalisierungsplattform für Suche, Produktempfehlungen, E-Mails und Anzeigen und wird von Tausenden Online-Shops weltweit genutzt.",
+      "en-GB": "Clerk.io is the e-commerce personalisation platform for site search, product recommendations, emails and ads, used by thousands of online stores worldwide."
+    },
+    "manufacturerLink": {
+      "de-DE": "https://clerk.io",
+      "en-GB": "https://clerk.io"
+    },
+    "supportLink": {
+      "de-DE": "https://help.clerk.io",
+      "en-GB": "https://help.clerk.io"
     }
   },
   "autoload": {
